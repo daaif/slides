@@ -1,0 +1,24 @@
+<div class="container-fluid">
+        <br>
+        <h2>Animations et variation des données</h2>
+        <p>
+            Pour effectuer une interpolation personnalisée sur l'attribut 
+            <code>d</code> de l'élément <code>path</code>, on utilise la 
+            méthode <code>attrTween()</code> à laquelle on passe en second 
+            paramètre la fonction d'interpolation de la transition.
+        </p>
+        <p class="small">
+            Dans notre cas, la fonction aura cet aspect : <br>
+            <textarea class="myCode">function tween(a) {
+    /* l'interpolateur entre les valeurs initiale et finale de la tranche */
+    const i = d3.interpolate(this._current, a)
+    /* Valeur initiale de l'objet tranche */
+    this._current = i(0)
+    /* fonction appellée pour chaque étape pour générer la commande de path*/
+    return function (t) {
+        return arcGen(i(t))
+    }
+}
+</textarea>
+        </p>
+    </div>

@@ -1,0 +1,234 @@
+[
+     {
+          "type": "chemise",
+          "reference": "1012732NC",
+          "designation": "CHEMISE MARCO FERRERA",
+          "prixNormal": "39,98",
+          "prixPromo": "",
+          "photo": "w10-1012732nc-tq.jpg"
+     },
+     {
+          "type": "chemise",
+          "reference": "2212780",
+          "designation": "CHEMISE MARCO FERRERA",
+          "prixNormal": "59",
+          "prixPromo": "39,98",
+          "photo": "w10-2212780-ny.jpg"
+     },
+     {
+          "type": "chemise",
+          "reference": "2212807DE",
+          "designation": "CHEMISE ANTHONY OF LONDON",
+          "prixNormal": "109",
+          "prixPromo": "79,98",
+          "photo": "s17-2212807de-ny.jpg"
+     },
+     {
+          "type": "chemise",
+          "reference": "781153757008",
+          "designation": "CHEMISE LIPSON",
+          "prixNormal": "124,98",
+          "prixPromo": "79,98",
+          "photo": "l14-781153757008-bk.jpg"
+     },
+     {
+          "type": "chemise",
+          "reference": "2212808DE",
+          "designation": "CHEMISE ANTHONY OF LONDON",
+          "prixNormal": "124,98",
+          "prixPromo": "79,98",
+          "photo": "s17-2212808de-ny.jpg"
+     },
+     {
+          "type": "chemise",
+          "reference": "781253757008",
+          "designation": "CHEMISE LIPSON",
+          "prixNormal": "125,65",
+          "prixPromo": "79,98",
+          "photo": "l14-781253757008-bl.jpg"
+     },
+     {
+          "type": "chemise",
+          "reference": "HR72734",
+          "designation": "CHEMISE FIL  FIL HIRST",
+          "prixNormal": "88",
+          "prixPromo": "",
+          "photo": "h09-hr72734-brp.jpg"
+     },
+     {
+          "type": "chemise",
+          "reference": "2212800E",
+          "designation": "CHEMISE ANTHONY OF LONDON",
+          "prixNormal": "95",
+          "prixPromo": "",
+          "photo": "m12-2212800e-pr.jpg"
+     },
+     {
+          "type": "chemise",
+          "reference": "12-304E",
+          "designation": "CHEMISE SATINEE ANTHONY OF LONDON",
+          "prixNormal": "95",
+          "prixPromo": "",
+          "photo": "m12-12-304e-wh_12.jpg"
+     },
+     {
+          "type": "chemise",
+          "reference": "2212899E",
+          "designation": "CHEMISE ANTHONY OF LONDON",
+          "prixNormal": "98",
+          "prixPromo": "",
+          "photo": "m12-2212899e-ry.jpg"
+     },
+     {
+          "type": "chemise",
+          "reference": "2212802DE",
+          "designation": "CHEMISE PAOLETTI",
+          "prixNormal": "98",
+          "prixPromo": "",
+          "photo": "m12-2212802de-bk.jpg"
+     },
+     {
+          "type": "veston",
+          "reference": "22651-02",
+          "designation": "VESTON SPORT ORVIETO",
+          "prixNormal": "199,99",
+          "prixPromo": "99,99",
+          "photo": "b30-22651-02-ny.jpg"
+     },
+     {
+          "type": "veston",
+          "reference": "2203633",
+          "designation": "VESTON SPORT ANTHONY OF LONDON",
+          "prixNormal": "199",
+          "prixPromo": "149",
+          "photo": "d07-2203633-bk.jpg"
+     },
+     {
+          "type": "veston",
+          "reference": "7JY0062",
+          "designation": "VESTON CALVIN KLEIN",
+          "prixNormal": "275",
+          "prixPromo": "199,98",
+          "photo": "p13-7jy0062-bk.jpg"
+     },
+     {
+          "type": "veston",
+          "reference": "2203621",
+          "designation": "VESTON SPORT ORVIETO",
+          "prixNormal": "249",
+          "prixPromo": "199,98",
+          "photo": "l05-2203621-ol.jpg"
+     },
+     {
+          "type": "veston",
+          "reference": "22665-14",
+          "designation": "VESTON SPORT ORVIETO",
+          "prixNormal": "149",
+          "prixPromo": "",
+          "photo": "b30-22665-10-gy.jpg"
+     },
+     {
+          "type": "veston",
+          "reference": "2203622",
+          "designation": "VESTON SPORT ORVIETO",
+          "prixNormal": "249",
+          "prixPromo": "199",
+          "photo": "l15-2203622-cha.jpg"
+     },
+     {
+          "type": "veston",
+          "reference": "22671-01",
+          "designation": "VESTON SPORT ORVIETO",
+          "prixNormal": "199,98",
+          "prixPromo": "",
+          "photo": "b30-22671-01-bka.jpg"
+     },
+     {
+          "type": "veston",
+          "reference": "2103625E",
+          "designation": "BLAZER PAOLETTI",
+          "prixNormal": "295",
+          "prixPromo": "249",
+          "photo": "l05-2103625e-bkb_1.jpg"
+     },
+     {
+          "type": "veston",
+          "reference": "122600",
+          "designation": "VESTON JACK VICTOR",
+          "prixNormal": "595",
+          "prixPromo": "549,98",
+          "photo": "j02-122600-chb.jpg"
+     },
+     {
+          "type": "blouson",
+          "reference": "5418285",
+          "designation": "BLOUSON POINT ZERO",
+          "prixNormal": "79",
+          "prixPromo": "59",
+          "photo": "p18-5418285-bl.jpg"
+     },
+     {
+          "type": "blouson",
+          "reference": "5418297",
+          "designation": "BLOUSON POINT ZERO",
+          "prixNormal": "79",
+          "prixPromo": "59",
+          "photo": "p18-5418297-ice.jpg"
+     },
+     {
+          "type": "blouson",
+          "reference": "2204982",
+          "designation": "MANTEAU ORVIETO",
+          "prixNormal": "199",
+          "prixPromo": "129",
+          "photo": "m23-2204982-ice.jpg"
+     },
+     {
+          "type": "blouson",
+          "reference": "5418151",
+          "designation": "MANTEAU POINT ZERO",
+          "prixNormal": "150",
+          "prixPromo": "129",
+          "photo": "p18-5418151-zz.jpg"
+     },
+     {
+          "type": "blouson",
+          "reference": "CJK31115",
+          "designation": "BLOUSON SCALA MILANO",
+          "prixNormal": "159",
+          "prixPromo": "",
+          "photo": "l02-cjk31115-bka.jpg"
+     },
+     {
+          "type": "blouson",
+          "reference": "2204981",
+          "designation": "MANTEAU ORVIETO GLACIER",
+          "prixNormal": "209",
+          "prixPromo": "199",
+          "photo": "m23-2204981-ch.jpg"
+     },
+     {
+          "type": "blouson",
+          "reference": "2204989",
+          "designation": "PARDESSUS ANTHONY OF LONDON",
+          "prixNormal": "309",
+          "prixPromo": "199",
+          "photo": "d06-2204989-bk.jpg"
+     },
+     {
+          "type": "blouson",
+          "reference": "3317",
+          "designation": "MANTEAU RAINFOREST",
+          "prixNormal": "325",
+          "prixPromo": "",
+          "photo": "r03-3317-br.jpg"
+     },
+     {
+          "type": "blouson",
+          "reference": "3960",
+          "designation": "MANTEAU QUARTZ NATURE",
+          "prixNormal": "425",
+          "prixPromo": "",
+          "photo": "q00-3960-rd_1.jpg"
+     }
+]

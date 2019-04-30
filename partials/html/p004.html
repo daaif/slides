@@ -1,0 +1,25 @@
+<div class="container">
+    <h1 class="text-center">Les Sélections</h1>
+    <p>
+            Modifier des documents à l'aide de l'API <code>DOM</code> du W3C est fastidieux: 
+            les noms de méthodes sont verbeux et l'approche impérative nécessite 
+            une itération manuelle et la tenue d'un registre d'état temporaire. <br>
+            Par exemple, pour changer la couleur du texte des éléments de paragraphe: </p>
+            <div class="outerCode">
+<textarea class="myCode">   let paragraphs = document.querySelectorAll('p')
+        for (let i = 0; i < paragraphs.length; i++) {
+            paragraphs[i].style.setProperty('color', 'blue', null)
+        }</textarea>
+            </div>
+    <p>D3 utilise une approche déclarative, opérant sur des ensembles arbitraires de noeuds appelés 
+        sélections. Par exemple, vous pouvez réécrire la boucle ci-dessus comme suit: </p>
+        <div class="outerCode">
+<textarea class="myCode">   d3.selectAll('p').style('color', 'brown')</textarea>
+</div>           
+    <p>Cependant, vous pouvez toujours manipuler des nœuds individuels selon vos besoins: </p>
+    <div class="outerCode">
+            <textarea class="myCode">   d3.select('body').style('background-color', 'black')</textarea>
+            </div> 
+    <p><code>select()</code> et <code>selectAll()</code> sont des méthodes de D3 comparables aux méthodes du 
+        DOM HTML <code>querySelector()</code> et <code>querySelectorAll()</code></p>
+</div>

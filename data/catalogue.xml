@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogue date="2012-12-12">
+    <categories>
+        <categorie id="chemise"/>
+        <categorie id="blouson"/>
+        <categorie id="veston"/>
+    </categories>
+    <commandes>
+        <commande date="2012-12-05" numero="c1001">
+            <entree ref="p1012732NC" prix="39.98" quantite="2" />
+            <entree ref="p2203633" prix="149" quantite="1" />
+            <entree ref="p2103625E" prix="249" quantite="1" />
+            <entree ref="p3317" prix="325" quantite="2" />
+        </commande>
+        <commande date="2012-12-06" numero="c1002">
+            <entree ref="p22651-02" prix="99.99" quantite="3" />
+            <entree ref="p2212807DE" prix="79.98" quantite="2" />
+            <entree ref="p5418151" prix="129" quantite="1" />
+        </commande>
+    </commandes>
+    <produits>
+        <produit type="chemise" promo="no">
+            <reference>p1012732NC</reference>
+            <designation>CHEMISE MARCO FERRERA</designation>
+            <prixNormal>39.98</prixNormal>
+            <prixPromo/>
+            <image>w10-1012732nc-tq.jpg</image>
+        </produit>
+        <produit type="chemise" promo="yes">
+            <reference>p2212780</reference>
+            <designation>CHEMISE MARCO FERRERA</designation>
+            <prixNormal>59</prixNormal>
+            <prixPromo>39.98</prixPromo>
+            <image>w10-2212780-ny.jpg</image>
+        </produit>
+        <produit type="chemise" promo="yes">
+            <reference>p2212807DE</reference>
+            <designation>CHEMISE ANTHONY OF LONDON</designation>
+            <prixNormal>109</prixNormal>
+            <prixPromo>79.98</prixPromo>
+            <image>s17-2212807de-ny.jpg</image>
+        </produit>
+        <produit type="chemise" promo="yes">
+            <reference>p3757008</reference>
+            <designation>CHEMISE LIPSON</designation>
+            <prixNormal>124.98</prixNormal>
+            <prixPromo>79.98</prixPromo>
+            <image>l14-781153757008-bk.jpg</image>
+        </produit>
+        <produit type="chemise" promo="yes">
+            <reference>p2212808DE</reference>
+            <designation>CHEMISE ANTHONY OF LONDON</designation>
+            <prixNormal>124.98</prixNormal>
+            <prixPromo>79.98</prixPromo>
+            <image>s17-2212808de-ny.jpg</image>
+        </produit>
+        <produit type="chemise" promo="yes">
+            <reference>p53757008</reference>
+            <designation>CHEMISE LIPSON</designation>
+            <prixNormal>125.65</prixNormal>
+            <prixPromo>79.98</prixPromo>
+            <image>l14-781253757008-bl.jpg</image>
+        </produit>
+        <produit type="chemise" promo="no">
+            <reference>pHR72734</reference>
+            <designation>CHEMISE FIL À FIL HÖRST</designation>
+            <prixNormal>88</prixNormal>
+            <prixPromo/>
+            <image>h09-hr72734-brp.jpg</image>
+        </produit>
+        <produit type="chemise" promo="no">
+            <reference>p2212800E</reference>
+            <designation>CHEMISE ANTHONY OF LONDON</designation>
+            <prixNormal>95</prixNormal>
+            <prixPromo/>
+            <image>m12-2212800e-pr.jpg</image>
+        </produit>
+        <produit type="chemise" promo="no">
+            <reference>p12-304E</reference>
+            <designation>CHEMISE SATINÉE ANTHONY OF LONDON</designation>
+            <prixNormal>95</prixNormal>
+            <prixPromo/>
+            <image>m12-12-304e-wh_12.jpg</image>
+        </produit>
+        <produit type="chemise" promo="no">
+            <reference>p2212899E</reference>
+            <designation>CHEMISE ANTHONY OF LONDON</designation>
+            <prixNormal>98</prixNormal>
+            <prixPromo/>
+            <image>m12-2212899e-ry.jpg</image>
+        </produit>
+        <produit type="chemise" promo="no">
+            <reference>p2212802DE</reference>
+            <designation>CHEMISE PAOLETTI</designation>
+            <prixNormal>98</prixNormal>
+            <prixPromo/>
+            <image>m12-2212802de-bk.jpg</image>
+        </produit>
+        <produit type="veston">
+            <reference>p22651-02</reference>
+            <designation>VESTON SPORT ORVIETO</designation>
+            <prixNormal>199.99</prixNormal>
+            <prixPromo>99.99</prixPromo>
+            <image>b30-22651-02-ny.jpg</image>
+        </produit>
+        <produit type="veston" promo="no">
+            <reference>p2203633</reference>
+            <designation>VESTON SPORT ANTHONY OF LONDON</designation>
+            <prixNormal>199</prixNormal>
+            <prixPromo>149</prixPromo>
+            <image>d07-2203633-bk.jpg</image>
+        </produit>
+        <produit type="veston" promo="yes">
+            <reference>p7JY0062</reference>
+            <designation>VESTON CALVIN KLEIN</designation>
+            <prixNormal>275</prixNormal>
+            <prixPromo>199.98</prixPromo>
+            <image>p13-7jy0062-bk.jpg</image>
+        </produit>
+        <produit type="veston" promo="yes">
+            <reference>p2203621</reference>
+            <designation>VESTON SPORT ORVIETO</designation>
+            <prixNormal>249</prixNormal>
+            <prixPromo>199.98</prixPromo>
+            <image>l05-2203621-ol.jpg</image>
+        </produit>
+        <produit type="veston" promo="no">
+            <reference>p22665-14</reference>
+            <designation>VESTON SPORT ORVIETO</designation>
+            <prixNormal>149</prixNormal>
+            <prixPromo/>
+            <image>b30-22665-10-gy.jpg</image>
+        </produit>
+        <produit type="veston" promo="yes">
+            <reference>p2203622</reference>
+            <designation>VESTON SPORT ORVIETO</designation>
+            <prixNormal>249</prixNormal>
+            <prixPromo>199</prixPromo>
+            <image>l15-2203622-cha.jpg</image>
+        </produit>
+        <produit type="veston" promo="no">
+            <reference>p22671-01</reference>
+            <designation>VESTON SPORT ORVIETO</designation>
+            <prixNormal>199.98</prixNormal>
+            <prixPromo/>
+            <image>b30-22671-01-bka.jpg</image>
+        </produit>
+        <produit type="veston" promo="yes">
+            <reference>p2103625E</reference>
+            <designation>BLAZER PAOLETTI</designation>
+            <prixNormal>295</prixNormal>
+            <prixPromo>249</prixPromo>
+            <image>l05-2103625e-bkb_1.jpg</image>
+        </produit>
+        <produit type="veston" promo="yes">
+            <reference>p122600</reference>
+            <designation>VESTON JACK VICTOR</designation>
+            <prixNormal>595</prixNormal>
+            <prixPromo>549.98</prixPromo>
+            <image>j02-122600-chb.jpg</image>
+        </produit>
+        <produit type="blouson" promo="yes">
+            <reference>p5418285</reference>
+            <designation>BLOUSON POINT ZERO</designation>
+            <prixNormal>79</prixNormal>
+            <prixPromo>59</prixPromo>
+            <image>p18-5418285-bl.jpg</image>
+        </produit>
+        <produit type="blouson" promo="yes">
+            <reference>p5418297</reference>
+            <designation>BLOUSON POINT ZERO</designation>
+            <prixNormal>79</prixNormal>
+            <prixPromo>59</prixPromo>
+            <image>p18-5418297-ice.jpg</image>
+        </produit>
+        <produit type="blouson" promo="yes">
+            <reference>p2204982</reference>
+            <designation>MANTEAU ORVIETO</designation>
+            <prixNormal>199</prixNormal>
+            <prixPromo>129</prixPromo>
+            <image>m23-2204982-ice.jpg</image>
+        </produit>
+        <produit type="blouson" promo="yes">
+            <reference>p5418151</reference>
+            <designation>MANTEAU POINT ZERO</designation>
+            <prixNormal>150</prixNormal>
+            <prixPromo>129</prixPromo>
+            <image>p18-5418151-zz.jpg</image>
+        </produit>
+        <produit type="blouson" promo="no">
+            <reference>pCJK31115</reference>
+            <designation>BLOUSON SCALA MILANO</designation>
+            <prixNormal>159</prixNormal>
+            <prixPromo/>
+            <image>l02-cjk31115-bka.jpg</image>
+        </produit>
+        <produit type="blouson" promo="yes">
+            <reference>2204981</reference>
+            <designation>MANTEAU ORVIETO GLACIER</designation>
+            <prixNormal>209</prixNormal>
+            <prixPromo>199</prixPromo>
+            <image>m23-2204981-ch.jpg</image>
+        </produit>
+        <produit type="blouson" promo="yes">
+            <reference>2204989</reference>
+            <designation>PARDESSUS ANTHONY OF LONDON</designation>
+            <prixNormal>309</prixNormal>
+            <prixPromo>199</prixPromo>
+            <image>d06-2204989-bk.jpg</image>
+        </produit>
+        <produit type="blouson" promo="no">
+            <reference>p3317</reference>
+            <designation>MANTEAU RAINFOREST</designation>
+            <prixNormal>325</prixNormal>
+            <prixPromo/>
+            <image>r03-3317-br.jpg</image>
+        </produit>
+        <produit type="blouson" promo="yes">
+            <reference>p3960</reference>
+            <designation>MANTEAU QUARTZ NATURE</designation>
+            <prixNormal>425</prixNormal>
+            <prixPromo/>
+            <image>q00-3960-rd_1.jpg</image>
+        </produit>
+    </produits>
+</catalogue>

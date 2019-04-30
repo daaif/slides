@@ -1,0 +1,9 @@
+.container textarea {
+    width: 100%;
+    min-height: 25vh ;
+}
+.container div {
+    padding: 4px;
+    background: #CCC;
+    margin-top: 4px;;
+}

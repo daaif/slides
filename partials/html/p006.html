@@ -1,0 +1,24 @@
+<div class="container">
+        <h1 class="text-center">Attacher des Données à une Sélection</h1>
+        <p>
+            Les propriétés calculées font souvent référence à des données liées. 
+            Les données sont spécifiées sous forme de tableau de valeurs et chaque valeur 
+            est transmise en tant que premier argument (<code>d</code>) aux fonctions de sélection.
+             Avec la jointure par index par défaut, le premier élément du tableau de données 
+             est transmis au premier nœud de la sélection, le deuxième élément au deuxième nœud, etc.
+              Par exemple, si vous liez un tableau de nombres à des éléments de paragraphe, 
+              vous pouvez utiliser ces chiffres pour calculer des tailles de police dynamiques:</p>
+                       
+        <div class="outerCode">
+                <textarea class="myCode">   d3.selectAll('p')
+        .data([4, 8, 15, 16, 23, 42])
+            .style('font-size', d => d + 'px')</textarea>
+                </div> 
+        <p>Dans ce cas les données du tableau vont se matérialiser dans la taille de la police 
+            de chacun des paragraphes. </p>
+        <p>La correspondance entre le nombre des données du tableau (ND) et les nombre des paragraphes (NP) n'est 
+            pas requise. On peut avoir ND > NP, ND == NP ou ND < NP. C'est ici ou entrent en jeu les méthodes
+            <code>enter()</code> et <code>exit()</code> Que nous verrons un peu plus tard.
+        </p>
+        
+    </div>

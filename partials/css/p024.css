@@ -1,0 +1,13 @@
+.graph svg {
+    border: 0.5px dotted gray;
+}
+.graph rect.marge {
+    stroke:#000;
+    stroke-width: 0.25;
+    stroke-dasharray: 1 2;
+    fill: none
+}
+
+.graph .bar {
+    fill: rgb(27, 13, 150);
+}

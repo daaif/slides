@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <br>
+    <h2>Animations et variation de données</h2>
+    <p>
+        Peut-on interpoler les valeurs de l'attribut <code>d</code>
+        de l'élément <code>&lt;path&gt;</code> ?
+    </p>
+    <p>
+        Si l'on essaie, on voit bien que le résultat est décevant.
+        Il faut alors opérer l'interpolation en amont au niveau des tranches.
+    </p>
+    <p>
+            Les valeurs de l'attribut <code>d</code> doivent être générées 
+            pour chaque étape de la transition.
+        </p>
+        <p class="small">
+            Une tranche est un objet qui exprime l'angle de départ et l'angle d'arrivé 
+            <code>startAngle</code> et <code>endAngle</code>. L'interpolation doit 
+            s'effectuer sur cet objet pour chaque étape de l'animation, un nouveau 
+            angle de départ et d'arrivé sont déterminés. Le chmin path est alors calculé 
+            pour ces angles.
+        </p>
+        <p class="small">
+            <code>i = d3.interpolate(100, 200)</code> retourne une fonction qui permet 
+            d'effectuer des interpolations entre les valeurs <code>100</code> et
+             <code>200</code>. Dans ce cas <code>i(0) -> 100</code> et <code>i(1) -> 200</code>
+        </p>
+
+</div>

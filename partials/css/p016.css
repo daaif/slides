@@ -1,0 +1,7 @@
+svg {
+    border: 0.5px dotted gray;
+}
+line {
+    stroke:maroon;
+    stroke-width: 40;
+}

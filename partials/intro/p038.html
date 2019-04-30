@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <br>
+    <h2>Courbes</h2>
+    <p>
+        Plusieurs type de courbes peuvent être tracées avec <code>D3</code>. 
+        Elles se basent toutes sur la fabrique <code>d3.line()</code>. 
+    </p>  
+    <p>
+        <textarea class="myCode">const points = [
+        [0, 80],
+        [50, 50],
+        [100, 120],
+        [150, 70],
+        [200, 35],
+        [250, 100]
+    ]
+    const lineGen = d3.line()
+    const pathData = lineGen(points)
+    /* "M0,80L50,50L100,120L150,70L200,35L250,100" */
+            </textarea>
+    </p>
+    <p>Il suffit ensuite d'utiliser <code>pathData</code> dans l'attribut <code>d</code>
+    d'un élément <code>&lt;path&gt;</code>.</p>
+    <p>L'interpolation linéaire est utilisée par défaut.</p>
+
+</div>

@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <h2>Surfaces (areas)</h2>
+    <p>
+        Typiquement utilisées pour représenter des fourchettes.
+    </p>
+    <p>
+        <textarea class="myCode">const data = [
+    {min: 40, max: 100},
+    {min: 10, max: 60},
+    {min: 80, max: 90},
+    {min: 50, max: 70},
+    {min: 20, max: 450},
+]    
+const fourchette = d3.area()
+    .x((d, i) => xScale(i))
+    .y0((d, i) => yScale(d.min))
+    .y1((d, i) => yScale(d.max))
+    </textarea>
+    </p>
+    
+</div>

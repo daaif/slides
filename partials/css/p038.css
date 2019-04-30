@@ -1,0 +1,13 @@
+svg {
+    border: 0.5px dotted gray;
+}
+
+path {
+    fill: none;
+    stroke: black;
+}
+
+circle {
+    fill: none;
+    stroke: gray;
+}

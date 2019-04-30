@@ -1,0 +1,29 @@
+{
+    "libraries" : [
+        {
+            "name": "jquery", 
+            "url": "https://code.jquery.com/jquery-3.3.1.min.js", 
+            "version": "3.3.1", 
+            "global": false
+        },
+        {
+            "name": "jquery-ui", 
+            "url": "https://code.jquery.com/ui/1.12.0/jquery-ui.min.js", 
+            "version": "1.12.0", 
+            "global": false
+        },
+        {
+            "name": "d3js", 
+            "url": "js/libs/d3.min.js", 
+            "version": "5.9.2", 
+            "global": true}
+    ],
+    "partials" : {
+        "intro" : "partials/intro/",
+        "html" : "partials/html/",
+        "css" : "partials/css/",
+        "js" : "partials/js/"
+    },
+    "showNumSlides": true,
+    "runOnChange": true
+}

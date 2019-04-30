@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <h1>Mise à l'Echelle des Données</h1>
+    <p>
+        Si les valeurs des données varient dans des fourchettes plus ou moins grandes, 
+        il faut adapter l'echelle de représentation à la taille du graphique en pixels.
+    </p>
+    <p>
+        Reprenons l'exemple précédent, mais cette fois-ci avec des données qui varient entre 50 et 1000 :
+        <br>
+        <textarea class="myCode ">  setInterval(() => {
+        if(choice) 
+            data.push(Math.random() * 950 + 50
+        else 
+            data.shift()
+        choice = !choice
+        update()
+    }, 500)</textarea>
+                    
+    <p><code>D3.js</code> prévoit à cet effet plusieurs fonction fabriques pour 
+        les mises à l'echelle. (Scaling)</p>
+    <p>Dans notre exemple, il suffit de de faire une mise à l'échelle Linéaire avec 
+        la fonction <code>scaleLinear()</code>
+    </p>
+    
+</div>

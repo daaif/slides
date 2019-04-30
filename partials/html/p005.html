@@ -1,0 +1,19 @@
+<div class="container">
+        <h1 class="text-center">Les Propriétés Dynamiques</h1>
+        <p>
+            Les styles, attributs et autres propriétés peuvent être spécifiés en tant 
+            que fonctions de données dans D3, pas seulement de simples constantes. 
+            Malgré leur apparente simplicité, ces fonctions peuvent être étonnamment puissantes. <br> 
+            D3 fournit de nombreuses fonctions et fabriques de fonctions réutilisables intégrées, 
+            telles que des primitives graphiques pour les graphiques en aires, en courbes et à secteurs.</p>
+                       
+        <p>Par exemple, pour choisir à chaque paragraphe une couleur aléatoire : </p>
+        <div class="outerCode">
+                <textarea class="myCode">   d3.selectAll('p').style('color', () => 'hsl(' + Math.random() * 360 + ',100%,50%)' )</textarea>
+                </div> <br>
+        <p>Ou pour distribuer des cercles SVG horizontalement : </p>
+        <div class="outerCode">
+                <textarea class="myCode">   d3.selectAll('circle').attr('cx', (d, i) => i * 50 + 50 )</textarea>
+                </div>
+        <p><code>i</code> étant l'indice d'ordre du cercle, et <code>d</code> pourrait être une donnée associée au cercle</p>
+    </div>

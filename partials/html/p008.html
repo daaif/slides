@@ -1,0 +1,40 @@
+<div class="container text-center">
+    <h1>Jointure des Données dans D3</h1>
+    <div class="row">
+        <div class="col text-left">
+            <p>Les <code>données</code> sont associées à l'aide de la méthode 
+                <code>data()</code> sous forme d'un tableau.
+            </p>
+            <p>
+            <textarea class="myCode no-lines">const data = [5, 8, 9]
+d3.selectAll('p').data(data)
+    .text(d => d + ' points')
+</textarea>
+Au maximum, trois paragraphes seront affectées.
+            </p>
+        </div>
+        <div class="col">
+                <img src="../images/enter-exit.svg" width="400" >
+        </div>
+        <div class="col text-right">
+            Les <code>éléments</code> sont issus d'une sélection à l'aide de la méthode
+            <code>selectAll()</code> en général. <br>Une sélection peut contenir
+            zéro ou plusieurs éléments.
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <cite class="small text-left">La figure ci-dessus, présente les lieux d'action des méthodes <code>enter()</code> 
+                et <code>exit()</code>. Si le nombre de données est <code>Nd</code> et le nombre 
+                d'éléments de la sélection est <code>Ne</code> alors les cas de figures possibles sont : 
+                <code>Ne &lt; Nd</code>, <code>Ne == Nd</code> et <code>Ne &gt; Nd</code>
+            </cite>
+            <ul>
+                <li>La méthode <code>enter()</code> entre en jeu lorsque 
+                    le nombre d'éléments est inférieur au nombre de données</li>
+                <li>La méthode <code>exit()</code> entre en jeu lorsque le 
+                    nombre d'éléments est supérieur au nombre de données</li>
+            </ul>
+        </div>
+    </div>
+</div>

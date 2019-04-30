@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <br>
+        <h2>Bien identifier les données liées !</h2>
+        <p>
+            Dans  l'exemple précédent, les nouvelles données  devaient arriver à la fin du
+            tableau et être supprimées à partir du début de celui-ci.
+        </p>
+        <p>
+            Par défaut, <code>D3</code> utilise les indices du tableau pour identifier les données
+            liées aux éléments. Et vu que les indices en <code>JS</code> sont recalculés à chaque 
+            modification, les transitions ne représentent pas corretment les changements effectués. 
+        </p>
+        <p><code>D3</code> permet de définir, au moment de la liaison de données, l'identifiant
+        associé à chaque donnée en passant en deuxième paramètre à la méthode <code>data()</code> 
+        une fonction à cette effet.
+        </p>
+        <textarea class="myCode no-lines">data = [{cin: 'U87876', name: 'xyz' ...}, ...]
+circles.data(data, person => person.cin)</textarea>
+        <p class="small">
+        En considérant que dans ce cas, les données représentent un tabelau de personnes et que chacune 
+        d'elles, est identifiée par un numéro de CIN unique.
+        </p>
+    </div>

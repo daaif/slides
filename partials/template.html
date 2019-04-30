@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/template.css">
+</head>
+<body>
+    <section class="slides">
+        <section class="slide example current">
+            <div class="code">
+                <ul class="navbar-code">
+                    <li><a href="#intro">INTRO</a></li>
+                    <li class="active"><a href="#html">HTML</a></li>
+                    <li><a href="#css">CSS</a></li>
+                    <li><a href="#js">JS</a></li>
+                </ul>
+                <div class="container-code">
+                    <div class="intro">
+                        
+                    </div>
+                    <div class="html">
+                        <textarea ></textarea>
+                    </div>
+                    <div class="css">
+                        <textarea ></textarea>
+                    </div>
+                    <div class="js">
+                        <textarea ></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="renderer">
+                <ul class="navbar-renderer">
+                    <li><a href="#run">RUN</a></li>
+                    <li class=""><a href="#reset">RESET</a></li>
+                                    </ul>
+                <div class="container-renderer">
+                    <iframe  frameborder="1"></iframe>
+                </div>
+            </div>
+        </section>
+    </section>
+    <script>
+        let down = false;
+        const slide = document.querySelector('.slide.example.current')
+        const code = document.querySelector('.slide.example.current .code')
+        const renderer = document.querySelector('.slide.example.current .renderer')
+        slide.addEventListener('mousedown', function(evt) {
+            if(this !== evt.target) return
+            // console.log(evt.clientX, slide.clientWidth)
+            down = true;
+        })
+        slide.addEventListener('mousemove', function(evt) {
+            // if(this !== evt.target) return
+            if(!down) return
+            resize(evt.clientX, slide.clientWidth)
+            this.style.cursor = 'ew-resize !important'
+            // console.log(evt.clientX, slide.clientWidth)
+            
+        })
+        slide.addEventListener('mouseup', function(evt) {
+            down = false;
+        })
+        function resize(x, w) {
+            const percentCode = 100 * x/w;
+            const percentRenderer = 100 - percentCode;
+            code.style.width = percentCode + '%';
+            renderer.style.width = percentRenderer + '%';
+        }
+    </script>
+</body>
+</html>
