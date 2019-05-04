@@ -1,11 +1,12 @@
-(function(){
-    let config = {}
-    fetch('config.json').then(resp => resp.json()).then(json => config = json)
+(async function(){
+    const config = await fetch('config.json').then(resp => resp.json())
+    const templates = await fetch('templates.html').then(resp => resp.text())
+    document.querySelector('#templates').innerHTML = templates
     let librariesLoaded = false;
     const progress = document.querySelector('#progress .progress-bar')
     const numSlides = document.querySelector('#numSlides')
     const poppup = document.querySelector('.outer')
-    const tooltip = document.querySelector('#tooltip')
+    // const tooltip = document.querySelector('#tooltip')
     const librariesContainer = poppup.querySelector('.libraries')
     const initialTemplate = poppup.querySelector('.libraries .library')
     const grads = document.querySelector('#grad')
@@ -93,13 +94,14 @@
         if(!slide.isLoaded) {
             loadSlide(slide, hash)
         } else {
-            render(slide)
+            if(slide.type === 'example')
+                render(slide)
         }
     }
     function loadSlide(slideObject, hash) {
         
         if(slideObject.type === 'page') {
-            const request = new Request('partials/html/' + slideObject.html + '.html')
+            const request = new Request(config.partials['html'] + slideObject.html + '.html')
             fetch(request)
                 .then(response => response.text())
                 .then(html => slideObject.slide.innerHTML = html)
@@ -194,9 +196,15 @@
                     if(current > 0 && !isTextarea)
                         location.hash =  (current - 1)
                     break
-                case 39 : // Right
+                case 39  : // Right
                     if(evt.ctrlKey) 
                         location.hash =  (current + 1)
+                    break
+                case 33  : // PageUp
+                    location.hash =  (current - 1)
+                    break
+                case 34  : // PageDown
+                    location.hash =  (current + 1)
                     break
                 case 40: // Down
                     if(current < slides.length - 1 && !isTextarea)
