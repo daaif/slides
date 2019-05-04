@@ -10,4 +10,6 @@ sp-slides new <presentationName>
 cd <presentationName>
 npm run serve
 ```
+# Demo
+[Demo site](https://sp-slides.daaif.net)
 
