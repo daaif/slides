@@ -1,65 +1,82 @@
 <div id="template" style="display: none">
     <div>
-        <div class="code">
-            <ul class="navbar-code">
-                <li><a href="#intro" class="btn btn-outline-success">INTRO</a></li>
-                <li class="active"><a href="#html" class="btn btn-outline-success">HTML</a></li>
-                <li><a href="#css" class="btn btn-outline-success">CSS</a></li>
-                <li><a href="#js" class="btn btn-outline-success">JS</a></li>
-
-            </ul>
-            <div class="container-code">
-                <div class="intro">
-
-                </div>
-                <div class="html">
-                    <textarea></textarea>
-                </div>
-                <div class="css">
-                    <textarea></textarea>
-                </div>
-                <div class="js">
-                    <textarea></textarea>
-                </div>
-            </div>
-        </div>
-        <div class="resizer"></div>
-        <div class="renderer">
-            <ul class="navbar-renderer">
-                <li><a href="#run" class="run btn btn-outline-danger">RUN</a></li>
-                <li class=""><a href="#reset" class="reset btn btn-outline-danger">RESET</a></li>
-                <li class=""><a href="#libs" class="libs btn btn-outline-danger">Libraries</a></li>
-            </ul>
-            <div class="container-renderer">
-                <!-- <iframe  frameborder="0"></iframe> -->
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="outer" style="display:none">
-    <div class="inner">
-        <ul class="navbar">
-            <li><button class="close">Close</button></li>
-            <li><button class="addlibs">Add</button></li>
+      <div class="code">
+        <ul class="navbar-code">
+          <li><a href="#intro" class="btn btn-outline-dark">INTRO</a></li>
+          <li class="active">
+            <a href="#html" class="btn btn-outline-success">HTML</a>
+          </li>
+          <li><a href="#css" class="btn btn-outline-info">CSS</a></li>
+          <li><a href="#js" class="btn btn-outline-warning">JS</a></li>
         </ul>
-        <div class="libraries">
-            <div class="library" style="display:none">
-                <div><input type="checkbox" class="sel" /></div>
-                <div class="name"></div>
-                <div class="url"></div>
-                <div class="version"></div>
-                <div><input type="checkbox" class="global" /></div>
-            </div>
+        <div class="container-code">
+          <div class="intro"></div>
+          <div class="html">
+            <textarea></textarea>
+          </div>
+          <div class="css">
+            <textarea></textarea>
+          </div>
+          <div class="js">
+            <textarea></textarea>
+          </div>
         </div>
+      </div>
+      <div class="resizer"></div>
+      <div class="renderer">
+        <ul class="navbar-renderer">
+          <li><a href="#run" class="run btn btn-outline-danger">RUN</a></li>
+          <li class="">
+            <a href="#reset" class="reset btn btn-outline-danger">RESET</a>
+          </li>
+          <li class="">
+            <a href="#libs" class="libs btn btn-outline-danger">Libraries</a>
+          </li>
+        </ul>
+        <div class="container-renderer">
+          <!-- <iframe  frameborder="0"></iframe> -->
+        </div>
+      </div>
     </div>
-</div>
-<div id="top">
+  </div>
+  
+  <div class="outer" style="display:none">
+    <div class="inner">
+      <ul class="navbar">
+        <li><button class=" btn btn-info close p-2">X</button></li>
+        <li><button class="addlibs btn btn-outline-info">Add</button></li>
+      </ul>
+      <div class="libraries">
+        <div class="library" style="display:none">
+          <div><input type="checkbox" class="sel" /></div>
+          <div class="name"></div>
+          <div class="url"></div>
+          <div class="version"></div>
+          <div><input type="checkbox" class="global" /></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="top">
     <div id="progress" class="progress bg-danger">
-        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="25" aria-valuemin="0"
-            aria-valuemax="100"></div>
+      <div
+        class="progress-bar bg-success"
+        role="progressbar"
+        aria-valuenow="25"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      ></div>
     </div>
     <div id="grad"></div>
-</div>
-<div id="tooltip"></div>
-<div id="numSlides"></div>
+  </div>
+  <div id="tooltip"></div>
+  <div id="help">
+    <a href="https://github.com" class="btn btn-outline-success btn-sm"
+      ><i class="fab fa-github"></i
+    ></a>
+    <a href="#" class="btn btn-outline-success btn-sm"
+      ><i class="fas fa-info-circle"></i
+    ></a>
+  </div>
+  <div id="numSlides"></div>
+  

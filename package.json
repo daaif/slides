@@ -1,6 +1,6 @@
 {
   "name": "slides",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,5 +11,9 @@
   "license": "ISC",
   "devDependencies": {
     "ws": "^7.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "codemirror": "^5.51.0"
   }
 }
