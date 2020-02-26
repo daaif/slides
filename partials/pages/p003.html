@@ -1,16 +1,17 @@
 <div class="container">
-        <img src="../../images/structure.png" 
-        style="float: right; margin-left: 10px; height: 90vh;"> 
-        <h1>How Simple Slides works <span class="badge badge-success">2</span></h1>
+         
+        <div class="row">
+            <div class="col-md-9">
+                <h1>How Simple Slides works <span class="badge badge-success">2</span></h1>
         
         <p>
             There are two types of slides : 
             <ul>
                 <li>
                     Simple slides having <code>.page</code> css class : <br>
-                    <textarea class="myCode"><section class="slide page" data-html="p001"></section></textarea>
-                    the <code>data-html</code> attribute referse to <code>p001.html</code> page
-                    located by default at <code>partials/html</code> folder. 
+                    <textarea class="myCode"><section class="slide page" data-page="p001"></section></textarea>
+                    the <code>data-page</code> attribute referse to <code>p001.html</code> page
+                    located by default at <code>partials/pages</code> folder. 
                 </li>
                 <li>
                     Example slides having <code>.example</code> css class : <br>
@@ -24,5 +25,10 @@
                 </li>
             </ul>
         </p>
+            </div>
+            <div class="col-md-3">
+                <img src="../../images/structure.png" class="img-fluid mt-5" alt="File strucure">
+            </div>
+        </div>
     
     </div>

@@ -1,0 +1,16 @@
+html,
+body {
+  margin: 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.console {
+  border: none;
+  border-top: 10px solid #ddd;
+  width: 100%;
+  background-color: #eee;
+  min-height: 25%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}

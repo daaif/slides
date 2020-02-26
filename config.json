@@ -1,24 +1,25 @@
 {
-    "libraries" : [
-        {
-            "name": "jquery", 
-            "url": "https://code.jquery.com/jquery-3.3.1.min.js", 
-            "version": "3.3.1", 
-            "global": true
-        },
-        {
-            "name": "jquery-ui", 
-            "url": "https://code.jquery.com/ui/1.12.0/jquery-ui.min.js", 
-            "version": "1.12.0", 
-            "global": true
-        }
-    ],
-    "partials" : {
-        "intro" : "partials/intro/",
-        "html" : "partials/html/",
-        "css" : "partials/css/",
-        "js" : "partials/js/"
+  "libraries": [
+    {
+      "name": "jquery",
+      "url": "https://code.jquery.com/jquery-3.3.1.min.js",
+      "version": "3.3.1",
+      "global": true
     },
-    "showNumSlides": true,
-    "runOnChange": true
+    {
+      "name": "jquery-ui",
+      "url": "https://code.jquery.com/ui/1.12.0/jquery-ui.min.js",
+      "version": "1.12.0",
+      "global": true
+    }
+  ],
+  "partials": {
+    "page": "partials/pages/",
+    "intro": "partials/intro/",
+    "html": "partials/html/",
+    "css": "partials/css/",
+    "js": "partials/js/"
+  },
+  "showNumSlides": true,
+  "runOnChange": true
 }

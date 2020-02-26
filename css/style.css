@@ -4,7 +4,7 @@ body {
   padding: 0;
   height: 100vh;
   font-size: 1.23em;
-  font-family: "PT Sans Narrow", sans-serif;
+  font-family: "Averia Sans Libre", cursive, "PT Sans Narrow", sans-serif;
 }
 code {
   font-size: 0.98em;
@@ -29,6 +29,9 @@ code {
   text-shadow: 0 0 2px #fff, 0 0 6px #00000099;
   font-variant: small-caps;
 }
+.slide.example.small-intro.current .intro .CodeMirror,
+.slide.example.small-html.current .html .CodeMirror,
+.slide.example.small-css.current .css .CodeMirror,
 .slide.example.small-js.current .js .CodeMirror {
   font-size: 0.8em;
 }
