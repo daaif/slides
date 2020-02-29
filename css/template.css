@@ -244,12 +244,13 @@
 #help {
   opacity: 0.3;
   position: fixed;
-  width: 100px;
+  width: 50vw;
   height: 60px;
   bottom: 0;
   left: 0;
   font-size: 0.5em;
   padding: 4px 8px;
+  z-index: 2000;
 }
 #help:hover {
   opacity: 1;
@@ -286,4 +287,12 @@
   font-size: 0.8em;
   opacity: 0.7;
   background: white;
+}
+
+#ytIframe {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
 }

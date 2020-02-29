@@ -5,6 +5,33 @@
   let librariesLoaded = false;
   const progress = document.querySelector("#progress .progress-bar");
   const numSlides = document.querySelector("#numSlides");
+  const ytBtn = document.querySelector("#yt");
+  const ytIframe = document.querySelector("#ytIframe");
+  ytBtn.addEventListener("click", function (evt) {
+    evt.preventDefault();
+    if (this.classList.contains('yt-close')) {
+      ytIframe.style.display = "none";
+      ytBtn.innerHTML = "<i class='fab fa-youtube'></i>";
+      ytIframe.setAttribute("src", "");
+      ytBtn.classList.remove('yt-close');
+    } else {
+      const slide = slides[current];
+      console.log(slide);
+      const url = slide.yturl + "?start=" +
+        slide.begin +
+        "&end=" + slide.end + "&autoplay=1";
+      ytIframe.setAttribute("src", url);
+      // ytIframe.setAttribute('start', slide.begin);
+      ytBtn.classList.add('yt-close');
+      ytBtn.innerHTML = "<i class='far fa-window-close'></i>";
+      ytIframe.style.display = "";
+      if (slide.begin && slide.end) {
+        setTimeout(() => {
+          ytIframe.style.display = "none";
+        }, slide.begin * 1 - slide.end * 1)
+      }
+    }
+  })
   const poppup = document.querySelector(".outer");
   // const tooltip = document.querySelector('#tooltip')
   const librariesContainer = poppup.querySelector(".libraries");
@@ -13,15 +40,28 @@
   const cachedTemplate = initialTemplate.cloneNode(true);
   cachedTemplate.style.display = "";
   initialTemplate.remove();
-  const sections = document.querySelectorAll(".slides .slide");
+  const sections = document.querySelectorAll(".slides > .slide");
   const slides = [];
   let current = 0,
     previous = 0;
-
-  sections.forEach(slide => {
+  let ytUrlDefault;
+  sections.forEach((slide, index) => {
     const type = slide.classList.contains("example") ? "example" : "page";
-    const { page, intro, html, css, js } = slide.dataset;
-    slides.push({ slide, type, page, intro, html, css, js, isLoaded: false });
+    const { page, intro, html, css, js, yturl, begin, end } = slide.dataset;
+    ytUrlDefault = yturl || ytUrlDefault;
+    slides.push({
+      slide,
+      type,
+      page,
+      intro,
+      html,
+      css,
+      js,
+      yturl: ytUrlDefault,
+      begin,
+      end,
+      isLoaded: false
+    });
   });
 
   grads.addEventListener("click", function (evt) {
@@ -96,6 +136,10 @@
     } else {
       if (slide.type === "example") render(slide);
     }
+    slide.begin ?
+      ytBtn.classList.remove('d-none') :
+      ytBtn.classList.add('d-none');
+    ytIframe.style.display = "none";
   }
   function loadSlide(slideObject, hash) {
     if (slideObject.type === "page") {
@@ -113,7 +157,6 @@
       slideObject.slide.innerHTML = template.innerHTML;
       attachEvents(slideObject);
       resizeSlide(slideObject);
-
       fetchContent(slideObject);
     }
   }
@@ -549,7 +592,8 @@
       grads.append(grad);
     });
   }
+
   setTimeout(resizeGraduations, 30);
-  // ALlez au premier slide.
+  // Allez au premier slide.
   location.hash = 0;
 })();

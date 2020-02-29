@@ -20,6 +20,7 @@
     "css": "partials/css/",
     "js": "partials/js/"
   },
+  "youtube": true,
   "showNumSlides": true,
   "runOnChange": true
 }

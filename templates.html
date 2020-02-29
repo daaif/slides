@@ -32,6 +32,11 @@
         <li class="">
           <a href="#libs" class="libs btn btn-outline-danger">Libraries</a>
         </li>
+        <li class="">
+          <a href="#yt" class="libs btn btn-outline-danger">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </li>
       </ul>
       <div class="container-renderer">
         <!-- <iframe  frameborder="0"></iframe> -->
@@ -48,11 +53,11 @@
     </ul>
     <div class="libraries">
       <div class="library" style="display:none">
-        <div><input type="checkbox" class="sel" /></div>
+        <div><input type="checkbox" class="sel" /> Selected</div>
         <div class="name"></div>
         <div class="url"></div>
         <div class="version"></div>
-        <div><input type="checkbox" class="global" /></div>
+        <div><input type="checkbox" class="global" /> Global</div>
       </div>
     </div>
   </div>
@@ -81,5 +86,16 @@
     class="btn btn-outline-success btn-sm"
     ><i class="fas fa-info-circle"></i
   ></a>
+  <a id="yt" class="btn btn-outline-danger btn-sm">
+    <i class="fab fa-youtube"></i>
+  </a>
 </div>
+<iframe
+  style="display: none;"
+  id="ytIframe"
+  src=""
+  frameborder="0"
+  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
 <div id="numSlides"></div>
