@@ -296,3 +296,11 @@
   width: 100%;
   height: 100vh;
 }
+#ytOverlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 40px;
+  background-color: rgba(156, 48, 48, 0.5);
+}
