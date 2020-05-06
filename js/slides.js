@@ -8,12 +8,7 @@ let player;
   const numSlides = document.querySelector("#numSlides");
   const ytBtn = document.querySelector("#yt");
   const ytIframe = document.querySelector("#ytIframe");
-  console.log(player);
-  const ytOverlay = document.querySelector("#ytOverlay");
-  ytOverlay.addEventListener("click", function (evt) {
-    evt.stopPropagation();
-    ytBtn.click();
-  });
+  let videoButtonTimerId;
   ytBtn.addEventListener("click", function (evt) {
     evt.preventDefault();
     if (this.classList.contains('yt-close')) {
@@ -24,7 +19,7 @@ let player;
       ytOverlay.style.display = "none";
     } else {
       const slide = slides[current];
-      console.log(slide);
+      // console.log(slide);
       const url = "//www.youtube.com/embed/"
         + slide.ytid
         + "?autoplay=1&rel=0&controls=0&start="
@@ -36,10 +31,10 @@ let player;
       ytBtn.innerHTML = "<i class='far fa-window-close'></i>";
       ytIframe.style.display = "";
       // ytOverlay.style.display = "";
-      if (slide.begin && slide.end) {
+      if (slide.begin !== undefined && slide.end != undefined) {
         setTimeout(() => {
           this.click();
-        }, (slide.end * 1 - slide.begin * 1) * 1000)
+        }, (slide.end - slide.begin) * 1000)
       }
 
     }
@@ -69,8 +64,8 @@ let player;
       css,
       js,
       ytid: ytidDefault,
-      begin,
-      end,
+      begin: begin !== undefined ? timeInSeconds(begin) : begin,
+      end: end !== undefined ? timeInSeconds(end) : end,
       isLoaded: false
     });
   });
@@ -95,6 +90,7 @@ let player;
     previous = current;
     tearDown(previous);
     current = hash;
+    const slide = slides[current];
 
     const position = ((hash + 1) / slides.length) * 100 + "%";
     progress.style.width = position;
@@ -115,7 +111,6 @@ let player;
         s.slide.classList.remove("current");
       }
     });
-    const slide = slides[current];
     if (!slide.isLoaded) {
       loadSlide(slide, hash);
     } else {
@@ -133,9 +128,12 @@ let player;
       );
       fetch(request)
         .then(response => response.text())
-        .then(html => (slideObject.slide.innerHTML = html))
+        .then(html => slideObject.slide.innerHTML = html)
+        .then(_ => slideObject.isLoaded = true)
+        .then(_ => attachImagesEvent(slideObject.slide))
+        .then(_ => reformatPage(slideObject.slide))
         .then(_ => highlight(slideObject.slide));
-      slideObject.isLoaded = true;
+
     } else {
       const template = document.querySelector("#template div");
 
@@ -143,6 +141,27 @@ let player;
       attachEvents(slideObject);
       resizeSlide(slideObject);
       fetchContent(slideObject);
+    }
+  }
+
+  function attachImagesEvent(slide) {
+    const inlineImages = slide.querySelectorAll('.img-inline');
+    inlineImages.forEach(img => {
+      img.addEventListener('click', function (evt) {
+        this.classList.toggle('img-inline-hover');
+        const imgWidth = parseInt(getComputedStyle(this).width)
+        const bodyWidth = parseInt(getComputedStyle(document.body).width)
+        console.log(bodyWidth, imgWidth, ((bodyWidth - imgWidth) / 2) + 'px')
+        this.style.left = ((bodyWidth - imgWidth) / 2) + 'px';
+      });
+    });
+  }
+  function reformatPage(slide) {
+    const blinkItems = slide.querySelectorAll('.blink-item');
+    // console.log(blinkItems);
+    if (blinkItems.length > 0) {
+      slide.blinkItems = blinkItems;
+      slide.currentBlinkIndex = -1;
     }
   }
 
@@ -213,35 +232,80 @@ let player;
       const page = document
         .querySelector(".current")
         .classList.contains("page");
+      const slideObject = getCurrentSlideObject();
       let keyCode = evt.keyCode,
         isTextarea = evt.target.tagName === "TEXTAREA";
       if (!page && keyCode === 191 && !isTextarea) keyCode = 118;
       evt.stopPropagation();
       switch (keyCode) {
         case 37: // Left
-          if (evt.ctrlKey) location.hash = current - 1;
+          if (evt.ctrlKey) go(current - 1, -1);
           break;
         case 38: // Up
-          if (current > 0 && !isTextarea) location.hash = current - 1;
+          if (current > 0 && !isTextarea)
+            go(current - 1, -1);
           break;
         case 39: // Right
-          if (evt.ctrlKey) location.hash = current + 1;
+          if (evt.ctrlKey)
+            go(current + 1, 1);
           break;
         case 33: // PageUp
-          location.hash = current - 1;
+          go(current - 1, -1);
           break;
         case 34: // PageDown
-          location.hash = current + 1;
+          go(current + 1, 1);
           break;
         case 40: // Down
           if (current < slides.length - 1 && !isTextarea)
-            location.hash = current + 1;
+            go(current + 1, 1);
           break;
         case 13:
-          if (evt.ctrlKey) render(getCurrentSlideObject());
+          if (evt.ctrlKey) render(slideObject);
           break;
         case 118:
           showNextTab();
+      }
+      function go(hash, direction) {
+        const slide = slideObject.slide
+        if (slide.blinkItems !== undefined) {
+          if (
+            direction > 0 &&
+            slide.currentBlinkIndex < slide.blinkItems.length - 1) {
+            slide.currentBlinkIndex += 1;
+            updateClasses(slide, direction)
+            // console.log(slide.currentBlinkIndex)
+          } else if (
+            direction < 0 &&
+            slide.currentBlinkIndex > -1) {
+            slide.currentBlinkIndex -= 1;
+            updateClasses(slide, direction)
+            // console.log(slide.currentBlinkIndex)
+          } else {
+            location.hash = hash;
+          }
+        } else {
+          location.hash = hash;
+        }
+
+        function updateClasses(slide, direction) {
+          const currentIndex = slide.currentBlinkIndex;
+          for (let i = 0; i < slide.blinkItems.length; i++) {
+            slide.blinkItems[i].classList.remove(
+              "blink-item-current",
+              "blink-item-down",
+              "blink-item-up"
+            )
+            if (i <= currentIndex) {
+              slide.blinkItems[i].classList.add("blink-item-active")
+            } else {
+              slide.blinkItems[i].classList.remove("blink-item-active")
+            }
+          }
+          if (currentIndex > -1) {
+            const cls = direction === 1 ? "blink-item-down" : "blink-item-up";
+            slide.blinkItems[currentIndex].classList.add("blink-item-current", cls);
+          }
+        }
       }
     });
     window.addEventListener("touchstart", function (evt) {
@@ -458,8 +522,8 @@ let player;
         }
       });
       Promise.all(promises).then(function (scripts) {
-        scripts.forEach(s => console.log(s));
-        console.log(win.contentWindow.document.body);
+        // scripts.forEach(s => console.log(s));
+        // console.log(win.contentWindow.document.body);
         const style = document.createElement("style");
         style.classList.add("added");
         style.innerText = slideObject.cssEditor.getValue();
@@ -581,4 +645,17 @@ let player;
   setTimeout(resizeGraduations, 30);
   // Allez au premier slide.
   location.hash = 0;
+  /**
+   * 
+   * @param {string} st ex. 01:23:08
+   * @returns number time in seconds
+   */
+  function timeInSeconds(st) {
+    const parts = st.split(':').reverse()
+    let t = 0;
+    for (let i = 0; i < parts.length; i++) {
+      t += parts[i] * 60 ** i;
+    }
+    return t;
+  }
 })();
