@@ -7,8 +7,7 @@ Simple Slides is created with Vanilla Javascript and incorporates CodeMirror to 
 # Install Simple Slides
 
 ```shell
-npm i -g sp-slides
-sp-slides new <presentationName>
+npx sp-slides new <presentationName>
 cd <presentationName>
 npm run serve
 ```
