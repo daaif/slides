@@ -1,4 +1,4 @@
-<div class="container small">
+<div class="container ">
   <h1>Here is the content of this presentation</h1>
   <p>
     <textarea class="myCode">
@@ -7,21 +7,27 @@
         <section class="slide page" data-page="p001"></section>
         <section class="slide page" data-page="p002"></section>
         
-        <section class="slide page" data-page="p003"></section> <!-- /* previous slide */ -->
-        
-        <section class="slide page" data-page="p004"></section> <!-- /* we are here */ -->
-
+        <!-- /* previous slide */ -->
+        <section class="slide page" data-page="p003"></section> 
+        <!-- /* we are in this slide */ -->
+        <section class="slide page" data-page="p004"></section> 
+        <!-- /* next slide */ -->
         <section class="slide example"
                 data-intro="p005" 
                 data-html="p005" 
                 data-css="p005" 
-                data-js="p005"> </section> <!-- /* next slide */ -->
-
+                data-js="p005"> </section> 
         <section class="slide page" data-page="p006"></section>
     </section>
     <div id="templates"></div>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      window.mermaid = mermaid;
+      mermaid.initialize({ startOnLoad: true, fontSize: 44 });
+
+      document.dispatchEvent(new Event('mermaid-ready'));
+    </script>
     <script src="js/slides4.js"></script>
-</body></textarea
-    >
+</body></textarea>
   </p>
 </div>
