@@ -1,3 +1,4 @@
+![New](https://img.shields.io/badge/New-MermaidJS-ffffff?style=plastic&color=50e815)
 # Simple Slides
 
 Simple slides is a framework that makes it easy to create HTML presentations.
