@@ -26,14 +26,29 @@
 
 <body>
   <section class="slides">
+    <!-- Simple Slides -->
     <section class="slide page" data-page="p001" data-ytid="O5WYZ1eliWM" data-begin="0" data-end="1:12"></section>
+    <!-- How Simple Slides works 1 -->
     <section class="slide page" data-page="p002" data-begin="1:12" data-end="2:44"></section>
+    <!-- How Simple Slides works 2 -->
     <section class="slide page" data-page="p003" data-begin="2:44" data-end="5:44"></section>
+    <!-- Here is the content of this presentation -->
     <section class="slide page" data-page="p004" data-begin="5:44" data-end="6:44"></section>
+    <!-- Adding Mermaid support -->
+    <section class="slide page" data-page="p005" data-begin="5:44" data-end="6:44"></section>
+    <!-- JQuery UI Selectable Example -->
     <section class="slide example" data-intro="p005" data-html="p005" data-css="p005" data-js="p005" data-begin="6:44"
       data-end="7:34"></section>
+      <!-- Additional Resources -->
     <section class="slide page" data-page="p006" data-begin="7:34" data-end="8:44"></section>
   </section>
+  <script type="module" >
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    window.mermaid = mermaid;
+    mermaid.initialize({ startOnLoad: true, fontSize: 44 });
+    
+    document.dispatchEvent(new Event('mermaid-ready'));
+</script> 
   <div id="templates"></div>
   <script src="js/slides.js"></script>
 </body>
