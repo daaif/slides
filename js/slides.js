@@ -26,7 +26,7 @@ document.addEventListener('mermaid-ready', (evt) => {
           + slide.begin
           + ((slide.end) ? "&end=" + slide.end : "");
         ytIframe.setAttribute("src", url);
-  
+
         ytBtn.classList.add('yt-close');
         ytBtn.innerHTML = "<i class='far fa-window-close'></i>";
         ytIframe.style.display = "";
@@ -36,7 +36,7 @@ document.addEventListener('mermaid-ready', (evt) => {
             this.click();
           }, (slide.end - slide.begin) * 1000)
         }
-  
+
       }
     })
     const poppup = document.querySelector(".outer");
@@ -69,18 +69,18 @@ document.addEventListener('mermaid-ready', (evt) => {
         isLoaded: false
       });
     });
-  
+
     grads.addEventListener("click", function (evt) {
       const position = parseInt((slides.length * evt.clientX) / this.clientWidth);
       location.hash = position;
     });
-  
+
     window.addEventListener("hashchange", function (evt) {
       const hash = parseInt(location.hash.substr(1));
       if (hash >= 0) navigate(hash);
     });
     attachNavigationEvents();
-  
+
     function navigate(hash = 0) {
       if (ytBtn.classList.contains('yt-close'))
         ytBtn.click();
@@ -91,10 +91,10 @@ document.addEventListener('mermaid-ready', (evt) => {
       tearDown(previous);
       current = hash;
       const slide = slides[current];
-  
+
       const position = ((hash + 1) / slides.length) * 100 + "%";
       progress.style.width = position;
-  
+
       if (config.showNumSlides) {
         const num = current + 1 + " / " + slides.length;
         numSlides.innerText = num;
@@ -134,17 +134,17 @@ document.addEventListener('mermaid-ready', (evt) => {
           .then(_ => reformatPage(slideObject.slide))
           .then(_ => highlight(slideObject.slide))
           .then(_ => mermaid.run());
-  
+
       } else {
         const template = document.querySelector("#template div");
-  
+
         slideObject.slide.innerHTML = template.innerHTML;
         attachEvents(slideObject);
         resizeSlide(slideObject);
         fetchContent(slideObject);
       }
     }
-  
+
     function attachImagesEvent(slide) {
       const inlineImages = slide.querySelectorAll('.img-inline');
       inlineImages.forEach(img => {
@@ -165,7 +165,7 @@ document.addEventListener('mermaid-ready', (evt) => {
         slide.currentBlinkIndex = -1;
       }
     }
-  
+
     function fetchContent(slideObject) {
       const container = slideObject.slide;
       const containerIntro = container.querySelector(".intro");
@@ -176,7 +176,7 @@ document.addEventListener('mermaid-ready', (evt) => {
       const htmlPath = config.partials.html;
       const cssPath = config.partials.css;
       const jsPath = config.partials.js;
-  
+
       const reqINTRO = new Request(introPath + slideObject.intro + ".html");
       const reqHTML = new Request(htmlPath + slideObject.html + ".html");
       const reqCSS = new Request(cssPath + slideObject.css + ".css");
@@ -184,24 +184,24 @@ document.addEventListener('mermaid-ready', (evt) => {
       const f0 = slideObject.intro
         ? fetch(reqINTRO).then(response => response.text())
         : Promise.resolve("");
-  
+
       const f1 = slideObject.html
         ? fetch(reqHTML).then(response => response.text())
         : Promise.resolve("");
-  
+
       const f2 = slideObject.css
         ? fetch(reqCSS).then(response => response.text())
         : Promise.resolve("");
-  
+
       const f3 = slideObject.js
         ? fetch(reqJS).then(response => response.text())
         : Promise.resolve("");
-  
+
       Promise.all([f0, f1, f2, f3]).then(([intro, html, css, js]) => {
         containerIntro.innerHTML = intro;
         highlight(containerIntro);
         mermaid.run()
-  
+
         containerHtml.innerHTML = html;
         slideObject.htmlEditor = CodeMirror.fromTextArea(containerHtml, {
           lineNumbers: true,
@@ -214,12 +214,12 @@ document.addEventListener('mermaid-ready', (evt) => {
         slideObject.jsEditor = CodeMirror.fromTextArea(containerJs, {
           lineNumbers: true,
         });
-  
+
         const type = intro ? "intro" : "html";
         render(slideObject);
         showEditor(slideObject.slide, type);
         slideObject.isLoaded = true;
-  
+
         if (config.runOnChange) {
           slideObject.htmlEditor.on("change", () => render(slideObject));
           slideObject.cssEditor.on("change", () => render(slideObject));
@@ -227,7 +227,7 @@ document.addEventListener('mermaid-ready', (evt) => {
         }
       });
     }
-  
+
     function attachNavigationEvents() {
       let pageX0 = -1;
       window.addEventListener("keydown", function (evt) {
@@ -289,7 +289,7 @@ document.addEventListener('mermaid-ready', (evt) => {
           } else {
             location.hash = hash;
           }
-  
+
           function updateClasses(slide, direction) {
             const currentIndex = slide.currentBlinkIndex;
             for (let i = 0; i < slide.blinkItems.length; i++) {
@@ -315,7 +315,7 @@ document.addEventListener('mermaid-ready', (evt) => {
         evt.stopImmediatePropagation();
         pageX0 = evt.touches[0].pageX;
       });
-  
+
       window.addEventListener("touchend", function (evt) {
         if (pageX0 === -1) return;
         const delta = evt.changedTouches[0].pageX - pageX0;
@@ -358,7 +358,7 @@ document.addEventListener('mermaid-ready', (evt) => {
       });
       setActive(slide, type);
     }
-  
+
     function setActive(slide, type) {
       const lis = slide.querySelectorAll(".current .navbar-code li");
       lis.forEach(li => {
@@ -370,13 +370,13 @@ document.addEventListener('mermaid-ready', (evt) => {
         }
       });
     }
-  
+
     function attachEvents(slideObject) {
       const navbarCode = slideObject.slide.querySelector(".navbar-code");
       const navbarRenderer = slideObject.slide.querySelector(".navbar-renderer");
       const closeButton = poppup.querySelector(".close");
       const addLibsButton = poppup.querySelector(".addlibs");
-  
+
       navbarCode.addEventListener("click", function (evt) {
         evt.preventDefault();
         if (evt.target !== this) {
@@ -405,7 +405,7 @@ document.addEventListener('mermaid-ready', (evt) => {
       addLibsButton.addEventListener("click", function () {
         const checkboxes = poppup.querySelectorAll(".library input.sel");
         const globals = poppup.querySelectorAll(".library input.global");
-  
+
         checkboxes.forEach((check, i) => {
           slideObject.libraries[i].selected = check.checked;
           slideObject.libraries[i].global = globals[i].checked;
@@ -414,15 +414,15 @@ document.addEventListener('mermaid-ready', (evt) => {
         closePoppup();
       });
     }
-  
+
     function resizeSlide(slideObject) {
       if (slideObject.isLoaded) return;
       slide = slideObject.slide;
-  
+
       let resizing = false;
       let iframe = null,
         iframeWindow = null;
-  
+
       const code = document.querySelector(".slide.example.current .code");
       const renderer = document.querySelector(".slide.example.current .renderer");
       const resizer = document.querySelector(".slide.example.current .resizer");
@@ -450,7 +450,7 @@ document.addEventListener('mermaid-ready', (evt) => {
         const bcrCode2 = code.getBoundingClientRect();
         renderer.style.width =
           bcrRenderer.width + bcrCode1.width - bcrCode2.width + "px";
-  
+
         // resize(evt.clientX, slide.clientWidth)
         slide.style.cursor = "ew-resize !important";
       }
@@ -461,12 +461,12 @@ document.addEventListener('mermaid-ready', (evt) => {
           bubbles: true,
           cancelable: false
         });
-  
+
         event.clientX = evt.clientX + clientRect.left;
         event.clientY = evt.clientY + clientRect.top;
         event.pageX = evt.pageX + clientRect.left;
         event.pageY = evt.pageY + clientRect.top;
-  
+
         //   console.log(event);
         window.dispatchEvent(event);
       }
@@ -503,7 +503,7 @@ document.addEventListener('mermaid-ready', (evt) => {
       const win = document.createElement("iframe");
       win.setAttribute("frameborder", 0);
       containerRenderer.appendChild(win);
-  
+
       attachLibraries(slideObject);
       function attachLibraries(slideObject) {
         if (slideObject.libraries === undefined) refreshLibraries(slideObject);
@@ -554,11 +554,11 @@ document.addEventListener('mermaid-ready', (evt) => {
           // console.old = console.log;
           // console.log = function () {
           //   var output = "", arg, i;
-  
+
           //   for (i = 0; i < arguments.length; i++) {
           //     arg = arguments[i];
           //     output += "<span class=\"log-" + (typeof arg) + "\">";
-  
+
           //     if (
           //       typeof arg === "object" &&
           //       typeof JSON === "object" &&
@@ -568,10 +568,10 @@ document.addEventListener('mermaid-ready', (evt) => {
           //     } else {
           //       output += arg;
           //     }
-  
+
           //     output += "</span>";
           //   }
-  
+
           //   attachedConsole.innerHTML += output + "<br>";
           //   console.old.apply(undefined, arguments);
           // };
@@ -629,7 +629,7 @@ document.addEventListener('mermaid-ready', (evt) => {
         });
       });
     }
-  
+
     window.addEventListener("resize", () => setTimeout(resizeGraduations, 30));
     function resizeGraduations(evt) {
       const grads = document.querySelector("#grad");
@@ -644,10 +644,10 @@ document.addEventListener('mermaid-ready', (evt) => {
         grads.append(grad);
       });
     }
-  
+
     setTimeout(resizeGraduations, 30);
     // Allez au premier slide.
-    location.hash = 0;
+    navigate()
     /**
      * 
      * @param {string} st ex. 01:23:08
@@ -666,8 +666,7 @@ document.addEventListener('mermaid-ready', (evt) => {
       setTimeout(() => go(0), 100)
     })
   })();
-  })
-  
-  
-  
-  
+})
+
+
+
