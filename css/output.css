@@ -4,13 +4,38 @@ body {
   padding: 10px;
   box-sizing: border-box;
 }
+
 .console {
   border: none;
   border-top: 10px solid #ddd;
   width: 100%;
-  background-color: #eee;
-  min-height: 25%;
+  background-color: #333;
+  min-height: 2vh;
   position: fixed;
   bottom: 0;
   left: 0;
+  max-height: 50vh;
+  overflow-y: auto;
+
+}
+
+.console div {
+  /* border-bottom: 1px solid #555; */
+  
+  line-height: 1.7em;
+  padding: 3px;
+  padding-top: 8px;
+  margin-top: 2px;
+  box-shadow: 0 0 0.5px #FFF;
+  font-family: monospace;
+
+}
+
+.console div::before {
+  content: '\00A0>\00A0\00A0';
+  color: rgb(241, 120, 245);
+  font-weight: bold;
+  transform: scaleY(2);
+  display: inline-block;
+
 }

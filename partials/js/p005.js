@@ -1,4 +1,18 @@
 /* This content is editable */
-$(function () {
-  $( "#selectable" ).selectable();
-});
+console.log("$(function () {$( '#selectable' ).selectable()});")
+console.log("$(function () {$( '#selectable' ).selectable()});")
+console.log("$(function () {$( '#selectable' ).selectable()});")
+console.log("$(function () {$( '#selectable' ).selectable()});")
+console.log('zfzef',345, "afgef")
+console.log('zfzef',345, "afgef")
+console.log('zfzef',345, "afgef")
+console.log('zfzef',345, "afgef")
+console.log('zfzef',345, "afgef")
+console.log('zfzef',345, "afgef")
+console.log('zfzef',345, "afgef")
+console.log('zfzef',345, "afgef")
+console.log('zfzef',345, "afgef")
+console.log('zfzef',345, "afgef")
+console.log('zfzef',345, "afgef")
+console.log('zfzef',345, "afgef")
+console.log('zfzef',345, "afgef")

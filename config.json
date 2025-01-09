@@ -1,6 +1,12 @@
 {
   "libraries": [
     {
+      "name": "console",
+      "url": "/js/console.js",
+      "version": "1",
+      "global": true
+    },
+    {
       "name": "jquery",
       "url": "https://code.jquery.com/jquery-3.3.1.min.js",
       "version": "3.3.1",
