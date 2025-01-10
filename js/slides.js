@@ -19,7 +19,6 @@ document.addEventListener('mermaid-ready', (evt) => {
         ytOverlay.style.display = "none";
       } else {
         const slide = slides[current];
-        // console.log(slide);
         const url = "//www.youtube.com/embed/"
           + slide.ytid
           + "?autoplay=1&rel=0&controls=0&start="
@@ -30,7 +29,6 @@ document.addEventListener('mermaid-ready', (evt) => {
         ytBtn.classList.add('yt-close');
         ytBtn.innerHTML = "<i class='far fa-window-close'></i>";
         ytIframe.style.display = "";
-        // ytOverlay.style.display = "";
         if (slide.begin !== undefined && slide.end != undefined) {
           setTimeout(() => {
             this.click();
@@ -159,7 +157,6 @@ document.addEventListener('mermaid-ready', (evt) => {
     }
     function reformatPage(slide) {
       const blinkItems = slide.querySelectorAll('.blink-item');
-      // console.log(blinkItems);
       if (blinkItems.length > 0) {
         slide.blinkItems = blinkItems;
         slide.currentBlinkIndex = -1;
@@ -231,7 +228,6 @@ document.addEventListener('mermaid-ready', (evt) => {
     function attachNavigationEvents() {
       let pageX0 = -1;
       window.addEventListener("keydown", function (evt) {
-        //   console.log(evt.keyCode);
         const page = document
           .querySelector(".current")
           .classList.contains("page");
@@ -276,13 +272,11 @@ document.addEventListener('mermaid-ready', (evt) => {
               slide.currentBlinkIndex < slide.blinkItems.length - 1) {
               slide.currentBlinkIndex += 1;
               updateClasses(slide, direction)
-              // console.log(slide.currentBlinkIndex)
             } else if (
               direction < 0 &&
               slide.currentBlinkIndex > -1) {
               slide.currentBlinkIndex -= 1;
               updateClasses(slide, direction)
-              // console.log(slide.currentBlinkIndex)
             } else {
               location.hash = hash;
             }
@@ -426,24 +420,17 @@ document.addEventListener('mermaid-ready', (evt) => {
       const code = document.querySelector(".slide.example.current .code");
       const renderer = document.querySelector(".slide.example.current .renderer");
       const resizer = document.querySelector(".slide.example.current .resizer");
-      // const initialCodeWidth = code.clientWidth
-      // const initialRendererWidth = code.clientWidth
       resizer.addEventListener("mousedown", function downHandler(evt) {
         evt.preventDefault();
-        // if(this !== evt.target) return
         resizing = true;
         iframe = slide.querySelector(".container-renderer iframe");
         iframeWindow = iframe.contentWindow;
         window.addEventListener("mousemove", moveHandler);
-        //   window.addEventListener("move", moveHandler);
         iframeWindow.addEventListener("mousemove", iframeMoveHandler);
         window.addEventListener("mouseup", upHandler);
-        //   iframeWindow.addEventListener("mouseup", upHandler);
       });
       function moveHandler(evt) {
-        //if(!down) return
-        // const delta = evt.clientX - downX
-        //   console.log(evt);
+
         const bcrCode1 = code.getBoundingClientRect();
         const bcrRenderer = renderer.getBoundingClientRect();
         code.style.width = evt.pageX - bcrCode1.left + "px";
@@ -451,13 +438,11 @@ document.addEventListener('mermaid-ready', (evt) => {
         renderer.style.width =
           bcrRenderer.width + bcrCode1.width - bcrCode2.width + "px";
 
-        // resize(evt.clientX, slide.clientWidth)
         slide.style.cursor = "ew-resize !important";
       }
       function iframeMoveHandler(evt) {
         const clientRect = iframe.getBoundingClientRect();
         const event = new CustomEvent("mousemove", {
-          // view: window,
           bubbles: true,
           cancelable: false
         });
@@ -467,26 +452,15 @@ document.addEventListener('mermaid-ready', (evt) => {
         event.pageX = evt.pageX + clientRect.left;
         event.pageY = evt.pageY + clientRect.top;
 
-        //   console.log(event);
         window.dispatchEvent(event);
       }
       function upHandler(evt) {
-        //   console.log("MouseUp Done");
         resizing = false;
         window.removeEventListener("mousemove", moveHandler);
-        //   window.removeEventListener("move", moveHandler);
         iframeWindow.removeEventListener("mousemove", iframeMoveHandler);
         window.removeEventListener("mouseup", upHandler);
-        //   iframeWindow.removeEventListener("mouseup", upHandler);
       }
-      // function resize(x, w) {
-      //     const percentCode = 100 * x / w;
-      //     const percentRenderer = 100 - percentCode
-      //     code.style.width = percentCode + '%';
-      //     renderer.style.width = percentRenderer + '%'
-      //     // code.style.width =  initialCodeWidth + x + 'px'
-      //     // renderer.style.width = initialRendererWidth - x + 'px'
-      // }
+
     }
     function tearDown(index) {
       const slideObject = slides[index];
@@ -548,33 +522,7 @@ document.addEventListener('mermaid-ready', (evt) => {
             }));
             win.contentWindow.document.head.appendChild(link);
           }, 0)
-          // const attachedConsole = document.createElement('pre');
-          // attachedConsole.classList.add('console');
-          // doc.body.appendChild(attachedConsole);
-          // console.old = console.log;
-          // console.log = function () {
-          //   var output = "", arg, i;
 
-          //   for (i = 0; i < arguments.length; i++) {
-          //     arg = arguments[i];
-          //     output += "<span class=\"log-" + (typeof arg) + "\">";
-
-          //     if (
-          //       typeof arg === "object" &&
-          //       typeof JSON === "object" &&
-          //       typeof JSON.stringify === "function"
-          //     ) {
-          //       output += JSON.stringify(arg);
-          //     } else {
-          //       output += arg;
-          //     }
-
-          //     output += "</span>";
-          //   }
-
-          //   attachedConsole.innerHTML += output + "<br>";
-          //   console.old.apply(undefined, arguments);
-          // };
         });
       }
     }
@@ -634,7 +582,6 @@ document.addEventListener('mermaid-ready', (evt) => {
     function resizeGraduations(evt) {
       const grads = document.querySelector("#grad");
       grads.innerHTML = "";
-      //const bcrWidth = grads.getBoundingClientRect().width
       const width = 100 / slides.length + "%";
       slides.forEach((s, i) => {
         const grad = document.createElement("div");
@@ -648,11 +595,7 @@ document.addEventListener('mermaid-ready', (evt) => {
     setTimeout(resizeGraduations, 30);
     // Allez au premier slide.
     navigate()
-    /**
-     * 
-     * @param {string} st ex. 01:23:08
-     * @returns number time in seconds
-     */
+
     function timeInSeconds(st) {
       const parts = st.split(':').reverse()
       let t = 0;

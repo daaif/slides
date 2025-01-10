@@ -35,7 +35,6 @@ body {
 }
 
 .log-symbol {
-  /* content: '\00A0>\00A0\00A0'; */
   color: rgb(241, 120, 245);
   font-weight: bold;
   display: block;
@@ -59,7 +58,8 @@ body {
   color: rgb(249, 200, 200);
 }
 
-pre {
+.console pre {
   margin: 0;
+  font-size: 1.1em;
   white-space: pre-wrap;
 }

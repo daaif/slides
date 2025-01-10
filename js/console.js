@@ -8,35 +8,25 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 const originalConsoleLog = console.log;
 console.log = function (message) {
-    originalConsoleLog(message); // Conserver le comportement original
-    // const message = args.map(arg => JSON.stringify(arg, null, 2)).join(' ');
-    //if (typeof message === 'object') {
+    originalConsoleLog(message); 
     message = formatValue(message);
-    //}
     addLog(message, 'log');
 };
 
 const originalConsoleWarn = console.warn;
 console.warn = function (message) {
-    originalConsoleWarn(message); // Conserver le comportement original
-    // const message = args.map(arg => JSON.stringify(arg, null, 2)).join(' ');
-    //if (typeof message === 'object') {
+    originalConsoleWarn(message); 
     message = formatValue(message);
-    //}
     addLog(message, 'warn');
 };
 
 const originalConsoleError = console.error;
 console.error = function (message) {
-    originalConsoleError(message); // Conserver le comportement original
-    // const message = args.map(arg => JSON.stringify(arg, null, 2)).join(' ');
-    //if (typeof message === 'object') {
+    originalConsoleError(message); 
     message = formatValue(message);
-    //}
     addLog(message, 'error');
 };
 
-// Fonction pour formatter la valeur avec indentation et retour à la ligne
 function formatValue(value, indent = 0) {
     const indentation = ' '.repeat(indent);
     if (typeof value === 'string') {
@@ -101,30 +91,7 @@ function addLog(message, type = 'log') {
     logElement.style.whiteSpace = 'pre-wrap';
     
     divConsole.append(logElement);
+    divConsole.scrollTop = divConsole.scrollHeight; 
 }
 
-// Styles CSS à ajouter
-const styles = `
-.console {
-    background-color: #1e1e1e;
-    color: #ffffff;
-    padding: 10px;
-    font-family: monospace;
-    overflow-y: auto;
-    max-height: 500px;
-}
-.json-string { color: #ce9178; }
-.json-number { color: #b5cea8; }
-.json-boolean { color: #569cd6; }
-.json-null { color: #569cd6; }
-.json-key { color: #9cdcfe; }
-pre {
-    margin: 0;
-    white-space: pre-wrap;
-}
-`;
 
-// Ajout des styles
-// const styleSheet = document.createElement('style');
-// styleSheet.textContent = styles;
-// document.head.appendChild(styleSheet);
