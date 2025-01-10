@@ -16,6 +16,7 @@ body {
   left: 0;
   max-height: 50vh;
   overflow-y: auto;
+  
 
 }
 
@@ -28,14 +29,37 @@ body {
   margin-top: 2px;
   box-shadow: 0 0 0.5px #FFF;
   font-family: monospace;
-
+  color: #FFF;
+  display: flex;
+  align-self: start;
 }
 
-.console div::before {
-  content: '\00A0>\00A0\00A0';
+.log-symbol {
+  /* content: '\00A0>\00A0\00A0'; */
   color: rgb(241, 120, 245);
   font-weight: bold;
-  transform: scaleY(2);
-  display: inline-block;
+  display: block;
+  font-size: 1.3em;
+}
 
+.json-key {
+  color: #f0f698;
+}
+.json-string {
+  color: rgb(193, 245, 169);
+
+}
+.json-number {
+  color: rgb(175, 213, 245);
+}
+.json-boolean {
+  color: rgb(252, 190, 252);
+}
+.json-null {
+  color: rgb(249, 200, 200);
+}
+
+pre {
+  margin: 0;
+  white-space: pre-wrap;
 }
