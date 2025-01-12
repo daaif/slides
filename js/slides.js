@@ -9,6 +9,7 @@ document.addEventListener('mermaid-ready', (evt) => {
     const ytBtn = document.querySelector("#yt");
     const ytIframe = document.querySelector("#ytIframe");
     let videoButtonTimerId;
+    let consoleIsEnabled = false
     ytBtn.addEventListener("click", function (evt) {
       evt.preventDefault();
       if (this.classList.contains('yt-close')) {
@@ -89,7 +90,6 @@ document.addEventListener('mermaid-ready', (evt) => {
       tearDown(previous);
       current = hash;
       const slide = slides[current];
-
       const position = ((hash + 1) / slides.length) * 100 + "%";
       progress.style.width = position;
 
@@ -118,6 +118,7 @@ document.addEventListener('mermaid-ready', (evt) => {
         ytBtn.classList.remove('d-none') :
         ytBtn.classList.add('d-none');
       ytIframe.style.display = "none";
+      
     }
     function loadSlide(slideObject, hash) {
       if (slideObject.type === "page") {
@@ -150,7 +151,6 @@ document.addEventListener('mermaid-ready', (evt) => {
           this.classList.toggle('img-inline-hover');
           const imgWidth = parseInt(getComputedStyle(this).width)
           const bodyWidth = parseInt(getComputedStyle(document.body).width)
-          console.log(bodyWidth, imgWidth, ((bodyWidth - imgWidth) / 2) + 'px')
           this.style.left = ((bodyWidth - imgWidth) / 2) + 'px';
         });
       });
@@ -218,9 +218,30 @@ document.addEventListener('mermaid-ready', (evt) => {
         slideObject.isLoaded = true;
 
         if (config.runOnChange) {
+
+          console.log('runOnChange')
           slideObject.htmlEditor.on("change", () => render(slideObject));
           slideObject.cssEditor.on("change", () => render(slideObject));
           slideObject.jsEditor.on("change", () => render(slideObject));
+        }
+        if (config.runOnEnter) {
+          console.log('RunOnEnter')
+          slideObject.htmlEditor.on("keydown",
+            (cm, evt) => {
+              if (evt.key === 'Enter')
+                render(slideObject)
+            });
+          slideObject.cssEditor.on("keydown",
+            (cm, evt) => {
+              if (evt.key === 'Enter')
+                render(slideObject)
+            });
+          slideObject.jsEditor.on("keydown",
+            (cm, evt) => {
+              if (evt.key === 'Enter')
+                render(slideObject)
+              console.log(evt)
+            });
         }
       });
     }
@@ -370,7 +391,6 @@ document.addEventListener('mermaid-ready', (evt) => {
       const navbarRenderer = slideObject.slide.querySelector(".navbar-renderer");
       const closeButton = poppup.querySelector(".close");
       const addLibsButton = poppup.querySelector(".addlibs");
-
       navbarCode.addEventListener("click", function (evt) {
         evt.preventDefault();
         if (evt.target !== this) {
@@ -392,6 +412,10 @@ document.addEventListener('mermaid-ready', (evt) => {
             break;
           case "libraries":
             showLibraries(slideObject);
+            break;
+          case "show console":
+          case "hide console":
+            showHideConsole(slideObject.slide.querySelector('.btn-console'))
             break;
         }
       });
@@ -473,10 +497,12 @@ document.addEventListener('mermaid-ready', (evt) => {
       const containerRenderer = slideObject.slide.querySelector(
         ".container-renderer"
       );
+      const btnConsole = document.querySelector('.btn-console')
       containerRenderer.innerHTML = "";
       const win = document.createElement("iframe");
       win.setAttribute("frameborder", 0);
       containerRenderer.appendChild(win);
+      rendererWindow = win.contentWindow
 
       attachLibraries(slideObject);
       function attachLibraries(slideObject) {
@@ -488,7 +514,8 @@ document.addEventListener('mermaid-ready', (evt) => {
             script.setAttribute("src", lib.url);
             if (lib.crossorigin)
               script.setAttribute('crossorigin', '')
-            setTimeout(_ => win.contentWindow.document.head.appendChild(script), 0)
+            win.contentWindow.document.head.appendChild(script)
+            // setTimeout(_ => win.contentWindow.document.head.appendChild(script), 0)
             promises.push(
               new Promise(resolve => {
                 script.onload = () => {
@@ -499,8 +526,6 @@ document.addEventListener('mermaid-ready', (evt) => {
           }
         });
         Promise.all(promises).then(function (scripts) {
-          // scripts.forEach(s => console.log(s));
-          // console.log(win.contentWindow.document.body);
           const style = document.createElement("style");
           style.classList.add("added");
           style.innerText = slideObject.cssEditor.getValue();
@@ -508,22 +533,42 @@ document.addEventListener('mermaid-ready', (evt) => {
           if (config.babel)
             script.setAttribute("type", "text/babel");
           script.classList.add("added");
-          script.textContent = slideObject.jsEditor.getValue("\n");
+          let scriptContent = slideObject.jsEditor.getValue();
+          scriptContent = `
+          try {
+            ${scriptContent}
+          } catch(err) {
+            console.error('*** ' + err.message + ' ***') 
+          }
+          `
+          script.textContent = scriptContent;
           const link = document.createElement('link');
           link.setAttribute("rel", "stylesheet");
           link.setAttribute("href", "../css/output.css");
-          setTimeout(_ => {
-            win.contentWindow.document.body.innerHTML = slideObject.htmlEditor.getValue();
-            win.contentWindow.document.head.appendChild(style);
-            win.contentWindow.document.body.appendChild(script);
-            win.contentWindow.document.dispatchEvent(new Event('DOMContentLoaded', {
-              bubbles: true,
-              cancelable: true
-            }));
-            win.contentWindow.document.head.appendChild(link);
-          }, 0)
+          win.contentWindow.document.body.innerHTML = slideObject.htmlEditor.getValue();
+          win.contentWindow.document.head.appendChild(style);
+          win.contentWindow.document.body.appendChild(script);
+          win.contentWindow.document.head.appendChild(link);
+          win.contentWindow.document.dispatchEvent(new Event('DOMContentLoaded', {
+            bubbles: true,
+            cancelable: true
+          }));
 
-        });
+          const doc = win.contentWindow.document
+          divConsole = doc.querySelector('.console')
+          if (consoleIsEnabled) {
+            divConsole.style.display = ''
+            divConsole.classList.remove('hide-console')
+          } else {
+            divConsole.style.display = 'none'
+            divConsole.classList.add('hide-console')
+          }
+          setTimeout(() => {
+            divConsole.scrollTop = divConsole.scrollHeight
+          }, 10)
+          // })
+        })
+
       }
     }
     function showLibraries(slideObject) {
@@ -608,6 +653,25 @@ document.addEventListener('mermaid-ready', (evt) => {
       go(1)
       setTimeout(() => go(0), 100)
     })
+
+    function showHideConsole(btn) {
+      const divConsole = rendererWindow.document.querySelector('.console')
+      divConsole.classList.toggle('hide-console')
+      const state = divConsole.classList.contains('hide-console')
+      if (state) {
+        divConsole.style.display = "none"
+        consoleIsEnabled = false
+        btn.innerText = 'Show Console'
+        console.log('Hide Console')
+      } else {
+        divConsole.style.display = "block"
+        divConsole.scrollTop = divConsole.scrollHeight;
+        consoleIsEnabled = true
+        btn.innerText = 'Hide Console'
+        console.log('Show Console')
+      }
+
+    }
   })();
 })
 

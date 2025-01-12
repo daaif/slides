@@ -28,5 +28,6 @@
   },
   "youtube": true,
   "showNumSlides": true,
-  "runOnChange": true
+  "runOnChange": false,
+  "runOnEnter": true
 }

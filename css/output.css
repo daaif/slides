@@ -16,13 +16,12 @@ body {
   left: 0;
   max-height: 50vh;
   overflow-y: auto;
-  
 
 }
 
 .console div {
   /* border-bottom: 1px solid #555; */
-  
+
   line-height: 1.7em;
   padding: 3px;
   padding-top: 8px;
@@ -44,16 +43,21 @@ body {
 .json-key {
   color: #f0f698;
 }
+
 .json-string {
   color: rgb(193, 245, 169);
 
 }
+
 .json-number {
   color: rgb(175, 213, 245);
+  /* color: #ce8404; */
 }
+
 .json-boolean {
   color: rgb(252, 190, 252);
 }
+
 .json-null {
   color: rgb(249, 200, 200);
 }
