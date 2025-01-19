@@ -276,7 +276,7 @@ div.layer-ui__wrapper > footer {
   bottom: 0.5rem !important;
 }
 
-div.layer-ui__wrapper > div > div > div.Stack.Stack_vertical.App-menu_top__left {
+div.layer-ui__wrapper > div > div > div.Stack.Stack_vertical.App-menu_top__left > div {
 display: none;
 }
 div.layer-ui__wrapper > div > div > div.layer-ui__wrapper__top-right .library-button {
