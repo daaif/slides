@@ -203,3 +203,91 @@ h2 {
   background: url(../images/background.png) no-repeat center center;
   background-size: cover;
 }
+
+/* .excalidraw-wrapper {
+  position: fixed;
+  top: 3%;
+  left: 3%;
+  width: 94%;
+  height: 94%;
+  background: white;
+  z-index: 1000;
+  display: none;
+}
+
+.excalidraw {
+  position: fixed  !important;
+}
+.excalidraw-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 45%;
+  z-index: 900;
+}
+
+.close-excalidraw {
+  position: fixed;
+  bottom: 20px;
+  left: 45%;
+  z-index: 1001;
+} */
+
+.excalidraw-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 1000;
+  display: none;
+}
+
+#excalidraw-root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.excalidraw-btn {
+  position: fixed;
+  bottom: 0px;
+  left: 45%;
+  z-index: 900;
+}
+
+.excalidraw .App-menu-content {
+  height: auto !important;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.excalidraw .App-menu {
+  z-index: 1001;
+}
+
+.excalidraw {
+  position: fixed !important;
+}
+
+div.layer-ui__wrapper > footer {
+  padding-left: 10rem !important;
+  bottom: 0.5rem !important;
+}
+
+div.layer-ui__wrapper > div > div > div.Stack.Stack_vertical.App-menu_top__left {
+display: none;
+}
+div.layer-ui__wrapper > div > div > div.layer-ui__wrapper__top-right .library-button {
+  display: none;
+}
+
+.excalidraw.excalidraw-modal-container   {
+  z-index: 9000 !important;
+}
+
+kbd {
+  color : white !important;
+  background-color: black !important;
+}
