@@ -77,18 +77,23 @@
   <a
     href="https://github.com/daaif/slides"
     class="btn btn-outline-success btn-sm"
+    title="Code source"
     ><i class="fab fa-github"></i
   ></a>
   <a
     href="https://sp-slides.daaif.net/#0"
     class="btn btn-outline-success btn-sm"
+    title="Documentation"
     ><i class="fas fa-info-circle"></i
   ></a>
-  <a id="yt" class="btn btn-outline-danger btn-sm">
+  <a id="yt" class="btn btn-outline-danger btn-sm" title="Vidéo YouTube">
     <i class="fab fa-youtube"></i>
   </a>
-  <a class="btn btn-outline-primary btn-sm close-excalidraw" onclick="toggleExcalidraw(event)">
+  <a class="btn btn-outline-primary btn-sm close-excalidraw" onclick="toggleExcalidraw(event)" title="Tableau blanc">
     <i class="fas fa-pen-square"></i>
+  </a>
+  <a id="theme-toggle" class="btn btn-outline-secondary btn-sm" onclick="ThemeManager.toggle()" title="Changer de thème">
+    <i class="fas fa-moon"></i>
   </a>
 </div>
 <iframe

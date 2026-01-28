@@ -3,6 +3,9 @@ document.addEventListener('mermaid-ready', (evt) => {
     const config = await fetch("config.json").then(resp => resp.json());
     const templates = await fetch("templates.html").then(resp => resp.text());
     document.querySelector("#templates").innerHTML = templates;
+
+    // Initialize theme manager
+    ThemeManager.init();
     let librariesLoaded = false;
     const progress = document.querySelector("#progress .progress-bar");
     const numSlides = document.querySelector("#numSlides");
@@ -284,6 +287,9 @@ document.addEventListener('mermaid-ready', (evt) => {
             break;
           case 118:
             showNextTab();
+            break;
+          case 84: // 'T' key - toggle theme
+            if (!isTextarea) ThemeManager.toggle();
         }
         function go(hash, direction) {
           const slide = slideObject.slide

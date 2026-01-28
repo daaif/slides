@@ -3,21 +3,21 @@
 }
 .slide.example {
   box-sizing: border-box;
-  border: 0.2px dotted gray;
+  border: 0.2px dotted var(--border-color);
   width: 100%;
   height: 100%;
   display: flex;
   cursor: ew-resize;
-  background: #eee;
+  background: var(--bg-secondary);
 }
 .slide.example .code {
   margin-right: 0px;
   width: 65%;
-  background: #fff;
+  background: var(--bg-primary);
 }
 .slide.example .renderer {
   width: 35%;
-  background: #fff;
+  background: var(--bg-primary);
 }
 
 .slide .container-code,
@@ -46,9 +46,9 @@
   list-style: none;
   padding: 2px;
   margin: 0;
-  border-bottom: 1px solid #ccc;
-  border-top: 1px solid #ccc;
-  background: #eee;
+  border-bottom: 1px solid var(--navbar-border);
+  border-top: 1px solid var(--navbar-border);
+  background: var(--navbar-bg);
   font-size: 0.8em;
   /* position: fixed; */
 }
@@ -91,7 +91,7 @@
 
 .slide.example.current .container-renderer {
   height: 100%;
-  border-left: 0.5px solid #ddd;
+  border-left: 0.5px solid var(--border-light);
 }
 .slide.example.current .renderer iframe {
   height: 96%;
@@ -115,7 +115,7 @@
 .slide.example.current .resizer {
   width: 1%;
   height: 100%;
-  background: #eee;
+  background: var(--resizer-bg);
 }
 
 @keyframes show {
@@ -163,7 +163,7 @@
   right: 0;
   top: 0;
   bottom: 0;
-  background: #000000bb;
+  background: var(--bg-overlay);
   z-index: 1000;
   font-size: 0.7em;
 }
@@ -174,9 +174,10 @@
   right: 10%;
   top: 10%;
   bottom: 10%;
-  background: #fff;
+  background: var(--modal-bg);
+  color: var(--text-primary);
   padding: 6px 12px;
-  border: 3px double #ccc;
+  border: 3px double var(--border-color);
 }
 .outer .inner .navbar {
   list-style: none;
@@ -188,8 +189,8 @@
 }
 .inner .libraries {
   display: table;
-  border-top: 0.7px dotted #aaa;
-  border-left: 0.7px dotted #aaa;
+  border-top: 0.7px dotted var(--border-dark);
+  border-left: 0.7px dotted var(--border-dark);
 }
 .inner .libraries .library {
   display: table-row;
@@ -197,8 +198,8 @@
 .inner .libraries .library > * {
   display: table-cell;
   padding: 4px 10px;
-  border-bottom: 0.1px dotted #aaa;
-  border-right: 0.1px dotted #aaa;
+  border-bottom: 0.1px dotted var(--border-dark);
+  border-right: 0.1px dotted var(--border-dark);
 }
 
 #progress {
@@ -267,15 +268,15 @@
   right: 0;
   z-index: 9200;
   opacity: 0;
-  border-bottom: 0.5px solid black;
+  border-bottom: 0.5px solid var(--border-dark);
 }
 #grad .grad {
   box-sizing: border-box;
-  color: #ccc;
+  color: var(--text-muted);
   font-size: 0.4em;
   text-align: center;
   z-index: 9300;
-  border-left: 0.5px solid #ccc;
+  border-left: 0.5px solid var(--border-color);
   /* position: relative; */
   /* display: none; */
 }
@@ -283,10 +284,11 @@
 #tooltip {
   position: absolute;
   padding: 6px;
-  border: 1px solid gray;
+  border: 1px solid var(--border-color);
   font-size: 0.8em;
   opacity: 0.7;
-  background: white;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 #ytIframe {

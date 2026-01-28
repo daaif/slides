@@ -5,6 +5,8 @@ body {
   height: 100vh;
   font-size: 1.23em;
   font-family: "Averia Sans Libre", cursive, "PT Sans Narrow", sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 code {
   font-size: 0.98em;
@@ -91,7 +93,7 @@ code {
   height: 40px;
   border: 1px solid greenyellow;
   padding: 2px;
-  background-color: black;
+  background-color: var(--bg-primary);
   cursor: zoom-in;
   /* transition: 300ms; */
 }
@@ -118,11 +120,11 @@ code {
 .blink-item-current {
   transition: opacity 1s;
   opacity: 1;
-  border-top: 16px solid #ccc;
+  border-top: 16px solid var(--blink-border);
   padding-top: 0.5em;
   padding-bottom: 0.3em;
   margin-top: 0.3em;
-  border-bottom: 6px solid #ccc;
+  border-bottom: 6px solid var(--blink-border);
 }
 
 @keyframes zoomIn {
@@ -288,6 +290,6 @@ div.layer-ui__wrapper > div > div > div.layer-ui__wrapper__top-right .library-bu
 }
 
 kbd {
-  color : white !important;
-  background-color: black !important;
+  color: var(--kbd-text) !important;
+  background-color: var(--kbd-bg) !important;
 }
