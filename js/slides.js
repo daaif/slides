@@ -1,3 +1,134 @@
+// Initialize console in iframe context
+function initConsoleInIframe(iframeWindow, iframeDoc) {
+  if (iframeWindow.consoleInitialized) return;
+  iframeWindow.consoleInitialized = true;
+
+  var consoleState = { filters: { log: true, warn: true, error: true }, height: 150 };
+
+  // Create console elements
+  var divConsole = iframeDoc.createElement('div');
+  divConsole.className = 'console hide-console';
+
+  var toolbar = iframeDoc.createElement('div');
+  toolbar.className = 'console-toolbar';
+  toolbar.innerHTML =
+    '<div class="console-filters">' +
+      '<span class="console-filter log active" data-type="log" title="Afficher/Masquer les logs"><i class="console-icon">●</i> Log</span>' +
+      '<span class="console-filter warn active" data-type="warn" title="Afficher/Masquer les warnings"><i class="console-icon">▲</i> Warn</span>' +
+      '<span class="console-filter error active" data-type="error" title="Afficher/Masquer les erreurs"><i class="console-icon">✖</i> Error</span>' +
+    '</div>' +
+    '<div class="console-actions">' +
+      '<span class="console-count" title="Nombre de messages">0</span>' +
+      '<button class="console-clear" title="Effacer la console">✕ Clear</button>' +
+    '</div>';
+
+  var resizeHandle = iframeDoc.createElement('div');
+  resizeHandle.className = 'console-resize-handle';
+
+  var logsContainer = iframeDoc.createElement('div');
+  logsContainer.className = 'console-logs';
+
+  divConsole.appendChild(resizeHandle);
+  divConsole.appendChild(toolbar);
+  divConsole.appendChild(logsContainer);
+  iframeDoc.body.appendChild(divConsole);
+
+  // Event handlers
+  toolbar.querySelectorAll('.console-filter').forEach(function(filter) {
+    filter.addEventListener('click', function() {
+      var type = filter.dataset.type;
+      consoleState.filters[type] = !consoleState.filters[type];
+      filter.classList.toggle('active');
+      logsContainer.querySelectorAll('.log-entry').forEach(function(entry) {
+        entry.style.display = consoleState.filters[entry.dataset.type] ? '' : 'none';
+      });
+    });
+  });
+
+  toolbar.querySelector('.console-clear').addEventListener('click', function() {
+    logsContainer.innerHTML = '';
+    divConsole.querySelector('.console-count').textContent = '0';
+  });
+
+  // Resize
+  var isResizing = false, startY, startHeight;
+  resizeHandle.addEventListener('mousedown', function(e) {
+    isResizing = true; startY = e.clientY; startHeight = divConsole.offsetHeight;
+    iframeDoc.addEventListener('mousemove', resize);
+    iframeDoc.addEventListener('mouseup', stopResize);
+  });
+  function resize(e) {
+    if (!isResizing) return;
+    var newHeight = Math.min(Math.max(80, startHeight + (startY - e.clientY)), iframeWindow.innerHeight * 0.8);
+    divConsole.style.height = newHeight + 'px';
+  }
+  function stopResize() {
+    isResizing = false;
+    iframeDoc.removeEventListener('mousemove', resize);
+    iframeDoc.removeEventListener('mouseup', stopResize);
+  }
+
+  // Helper functions
+  function escapeHtml(str) {
+    var div = iframeDoc.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function formatValue(value, indent) {
+    indent = indent || 0;
+    if (typeof value === 'string') return '<span class="json-string">"' + escapeHtml(value) + '"</span>';
+    if (typeof value === 'number') return '<span class="json-number">' + value + '</span>';
+    if (typeof value === 'boolean') return '<span class="json-boolean">' + value + '</span>';
+    if (value === null) return '<span class="json-null">null</span>';
+    if (value === undefined) return '<span class="json-null">undefined</span>';
+    if (Array.isArray(value)) {
+      if (value.length === 0) return '[]';
+      var spaces = ' '.repeat(indent + 2);
+      return '[\n' + value.map(function(item) { return spaces + formatValue(item, indent + 2); }).join(',\n') + '\n' + ' '.repeat(indent) + ']';
+    }
+    if (typeof value === 'object') {
+      var entries = Object.entries(value);
+      if (entries.length === 0) return '{}';
+      var spaces = ' '.repeat(indent + 2);
+      return '{\n' + entries.map(function(e) {
+        return spaces + '<span class="json-key">"' + escapeHtml(e[0]) + '":</span> ' + formatValue(e[1], indent + 2);
+      }).join(',\n') + '\n' + ' '.repeat(indent) + '}';
+    }
+    return escapeHtml(String(value));
+  }
+
+  function addLog(message, type) {
+    var logElement = iframeDoc.createElement('div');
+    logElement.className = 'log-entry log-' + type;
+    logElement.dataset.type = type;
+    var icon = type === 'log' ? '●' : type === 'warn' ? '▲' : '✖';
+    logElement.innerHTML = '<span class="log-icon">' + icon + '</span><pre>' + message + '</pre>';
+    if (!consoleState.filters[type]) logElement.style.display = 'none';
+    logsContainer.appendChild(logElement);
+    logsContainer.scrollTop = logsContainer.scrollHeight;
+    divConsole.querySelector('.console-count').textContent = logsContainer.querySelectorAll('.log-entry').length;
+  }
+
+  // Override console methods
+  var origLog = iframeWindow.console.log;
+  var origWarn = iframeWindow.console.warn;
+  var origError = iframeWindow.console.error;
+
+  iframeWindow.console.log = function() {
+    origLog.apply(iframeWindow.console, arguments);
+    for (var i = 0; i < arguments.length; i++) addLog(formatValue(arguments[i]), 'log');
+  };
+  iframeWindow.console.warn = function() {
+    origWarn.apply(iframeWindow.console, arguments);
+    for (var i = 0; i < arguments.length; i++) addLog(formatValue(arguments[i]), 'warn');
+  };
+  iframeWindow.console.error = function() {
+    origError.apply(iframeWindow.console, arguments);
+    for (var i = 0; i < arguments.length; i++) addLog(formatValue(arguments[i]), 'error');
+  };
+}
+
 document.addEventListener('mermaid-ready', (evt) => {
   (async function () {
     const config = await fetch("config.json").then(resp => resp.json());
@@ -447,8 +578,16 @@ document.addEventListener('mermaid-ready', (evt) => {
       const addLibsButton = poppup.querySelector(".addlibs");
       navbarCode.addEventListener("click", function (evt) {
         evt.preventDefault();
-        if (evt.target !== this) {
-          const type = evt.target.innerText.toLowerCase();
+        if (evt.target === this) return;
+
+        // Use closest() to handle clicks on icons or text inside buttons
+        const btn = evt.target.closest('a');
+        if (!btn) return;
+
+        // Get href to determine type (e.g., #html -> html)
+        const href = btn.getAttribute('href');
+        if (href) {
+          const type = href.replace('#', '').toLowerCase();
           showEditor(slideObject.slide, type);
         }
       });
@@ -456,34 +595,176 @@ document.addEventListener('mermaid-ready', (evt) => {
         evt.preventDefault();
         evt.stopPropagation();
         if (evt.target === this) return;
-        switch (evt.target.innerText.toLowerCase()) {
-          case "run":
-            render(slideObject);
-            slideObject.slide.querySelector(".navbar-renderer .run").focus();
-            break;
-          case "reset":
-            loadSlide(slideObject, current);
-            break;
-          case "libraries":
-            showLibraries(slideObject);
-            break;
-          case "show console":
-          case "hide console":
-            showHideConsole(slideObject.slide.querySelector('.btn-console'))
-            break;
+
+        // Use closest() to handle clicks on icons or text inside buttons
+        const btn = evt.target.closest('a');
+        if (!btn) return;
+
+        if (btn.classList.contains('run')) {
+          render(slideObject);
+          btn.focus();
+        } else if (btn.classList.contains('reset')) {
+          loadSlide(slideObject, current);
+        } else if (btn.classList.contains('libs')) {
+          showLibraries(slideObject);
+        } else if (btn.classList.contains('btn-console')) {
+          showHideConsole(btn);
         }
       });
       closeButton.addEventListener("click", closePoppup);
-      addLibsButton.addEventListener("click", function () {
-        const checkboxes = poppup.querySelectorAll(".library input.sel");
-        const globals = poppup.querySelectorAll(".library input.global");
 
-        checkboxes.forEach((check, i) => {
-          slideObject.libraries[i].selected = check.checked;
-          slideObject.libraries[i].global = globals[i].checked;
-        });
+      // Apply button - save selections and close
+      addLibsButton.addEventListener("click", function () {
+        applyLibraryChanges(slideObject);
         render(slideObject);
         closePoppup();
+      });
+
+      // Add new library button
+      const addNewLibBtn = poppup.querySelector(".add-new-lib");
+      if (addNewLibBtn) {
+        addNewLibBtn.addEventListener("click", function () {
+          addNewLibrary(slideObject);
+        });
+      }
+
+      // Enter key in form fields triggers add
+      const formInputs = poppup.querySelectorAll(".add-library-form input");
+      formInputs.forEach(input => {
+        input.addEventListener("keypress", function (evt) {
+          if (evt.key === "Enter") {
+            evt.preventDefault();
+            addNewLibrary(slideObject);
+          }
+        });
+      });
+
+      // Remove library buttons (delegated)
+      librariesContainer.addEventListener("click", function (evt) {
+        const removeBtn = evt.target.closest(".remove-lib");
+        if (removeBtn) {
+          const libraryRow = removeBtn.closest(".library");
+          const index = Array.from(librariesContainer.querySelectorAll(".library")).indexOf(libraryRow);
+          if (index >= 0) {
+            removeLibrary(slideObject, index);
+          }
+        }
+      });
+    }
+
+    // Apply library checkbox changes
+    function applyLibraryChanges(slideObject) {
+      const checkboxes = poppup.querySelectorAll(".library input.sel");
+      const globals = poppup.querySelectorAll(".library input.global");
+
+      checkboxes.forEach((check, i) => {
+        if (slideObject.libraries[i]) {
+          slideObject.libraries[i].selected = check.checked;
+          slideObject.libraries[i].global = globals[i].checked;
+        }
+      });
+    }
+
+    // Add a new library
+    function addNewLibrary(slideObject) {
+      const nameInput = poppup.querySelector(".lib-name");
+      const urlInput = poppup.querySelector(".lib-url");
+      const versionInput = poppup.querySelector(".lib-version");
+
+      const name = nameInput.value.trim();
+      const url = urlInput.value.trim();
+      const version = versionInput.value.trim() || "custom";
+
+      if (!name || !url) {
+        alert("Please enter at least a name and URL for the library.");
+        return;
+      }
+
+      // Validate URL
+      if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        alert("Please enter a valid URL starting with http:// or https://");
+        return;
+      }
+
+      // Add to slide libraries
+      const newLib = {
+        name: name,
+        url: url,
+        version: version,
+        selected: true,
+        global: false,
+        custom: true
+      };
+
+      slideObject.libraries.push(newLib);
+
+      // Also add to config for persistence in session
+      config.libraries.push({
+        name: name,
+        url: url,
+        version: version,
+        global: false,
+        custom: true
+      });
+
+      // Add to UI
+      addLibraryToUI(newLib, true);
+
+      // Clear form
+      nameInput.value = "";
+      urlInput.value = "";
+      versionInput.value = "";
+      nameInput.focus();
+    }
+
+    // Add library entry to UI
+    function addLibraryToUI(lib, isCustom = false) {
+      const entree = cachedTemplate.cloneNode(true);
+      entree.querySelector(".name").innerText = lib.name;
+      entree.querySelector(".url").innerText = lib.url;
+      entree.querySelector(".version").innerText = lib.version;
+      entree.querySelector(".sel").checked = lib.selected;
+      entree.querySelector(".global").checked = lib.global;
+      if (isCustom || lib.custom) {
+        entree.classList.add("custom-lib");
+      }
+      librariesContainer.appendChild(entree);
+    }
+
+    // Remove a library
+    function removeLibrary(slideObject, index) {
+      if (index < 0 || index >= slideObject.libraries.length) return;
+
+      const lib = slideObject.libraries[index];
+
+      // Confirm for non-custom libraries
+      if (!lib.custom) {
+        if (!confirm(`Remove "${lib.name}" from the library list?`)) {
+          return;
+        }
+      }
+
+      // Remove from slideObject
+      slideObject.libraries.splice(index, 1);
+
+      // Remove from config
+      const configIndex = config.libraries.findIndex(l => l.url === lib.url);
+      if (configIndex >= 0) {
+        config.libraries.splice(configIndex, 1);
+      }
+
+      // Refresh UI
+      refreshLibrariesUI(slideObject);
+    }
+
+    // Refresh libraries UI
+    function refreshLibrariesUI(slideObject) {
+      // Clear current list
+      librariesContainer.innerHTML = "";
+
+      // Re-add all libraries
+      slideObject.libraries.forEach(lib => {
+        addLibraryToUI(lib, lib.custom);
       });
     }
 
@@ -580,10 +861,26 @@ document.addEventListener('mermaid-ready', (evt) => {
           }
         });
         Promise.all(promises).then(function (scripts) {
-          const style = document.createElement("style");
+          const iframeDoc = win.contentWindow.document;
+
+          const style = iframeDoc.createElement("style");
           style.classList.add("added");
           style.innerText = slideObject.cssEditor.getValue();
-          const script = document.createElement("script");
+
+          const link = iframeDoc.createElement('link');
+          link.setAttribute("rel", "stylesheet");
+          link.setAttribute("href", "../css/output.css");
+
+          // Set HTML content first
+          iframeDoc.body.innerHTML = slideObject.htmlEditor.getValue();
+          iframeDoc.head.appendChild(style);
+          iframeDoc.head.appendChild(link);
+
+          // Initialize console directly in iframe context
+          initConsoleInIframe(win.contentWindow, iframeDoc);
+
+          // Create user script IN THE IFRAME CONTEXT
+          const script = iframeDoc.createElement("script");
           if (config.babel)
             script.setAttribute("type", "text/babel");
           script.classList.add("added");
@@ -592,75 +889,60 @@ document.addEventListener('mermaid-ready', (evt) => {
           try {
             ${scriptContent}
           } catch(err) {
-            console.error('*** ' + err.message + ' ***') 
+            console.error('*** ' + err.message + ' ***')
           }
           `
           script.textContent = scriptContent;
-          const link = document.createElement('link');
-          link.setAttribute("rel", "stylesheet");
-          link.setAttribute("href", "../css/output.css");
-          win.contentWindow.document.body.innerHTML = slideObject.htmlEditor.getValue();
-          win.contentWindow.document.head.appendChild(style);
-          win.contentWindow.document.body.appendChild(script);
-          win.contentWindow.document.head.appendChild(link);
-          win.contentWindow.document.dispatchEvent(new Event('DOMContentLoaded', {
+          iframeDoc.body.appendChild(script);
+
+          iframeDoc.dispatchEvent(new Event('DOMContentLoaded', {
             bubbles: true,
             cancelable: true
           }));
 
-          const doc = win.contentWindow.document
-          divConsole = doc.querySelector('.console')
-          if (consoleIsEnabled) {
-            divConsole.style.display = ''
-            divConsole.classList.remove('hide-console')
-          } else {
-            divConsole.style.display = 'none'
-            divConsole.classList.add('hide-console')
+          divConsole = iframeDoc.querySelector('.console')
+
+          if (divConsole) {
+            if (consoleIsEnabled) {
+              divConsole.style.display = 'flex'
+              divConsole.classList.remove('hide-console')
+            } else {
+              divConsole.style.display = 'none'
+              divConsole.classList.add('hide-console')
+            }
+            setTimeout(() => {
+              divConsole.scrollTop = divConsole.scrollHeight
+            }, 10)
           }
-          setTimeout(() => {
-            divConsole.scrollTop = divConsole.scrollHeight
-          }, 10)
-          // })
         })
 
       }
     }
     function showLibraries(slideObject) {
       refreshLibraries(slideObject);
-      const checkboxes = poppup.querySelectorAll(".library input.sel");
-      const globals = poppup.querySelectorAll(".library input.global");
-      checkboxes.forEach((check, i) => {
-        check.checked =
-          slideObject.libraries[i].selected || slideObject.libraries[i].global;
-        globals[i].checked = slideObject.libraries[i].global;
+      // Clear and rebuild UI to reflect current state
+      librariesContainer.innerHTML = "";
+      slideObject.libraries.forEach(lib => {
+        addLibraryToUI(lib, lib.custom);
       });
       poppup.style.display = "";
     }
+
     function refreshLibraries(slideObject) {
       if (slideObject.libraries === undefined) {
         slideObject.libraries = [];
         config.libraries.forEach(lib => {
-          const { name, url, version, global, crossorigin } = lib;
+          const { name, url, version, global, crossorigin, custom } = lib;
           slideObject.libraries.push({
             selected: global,
             name,
             url,
             version,
             global,
-            crossorigin
+            crossorigin,
+            custom: custom || false
           });
         });
-        if (!librariesLoaded) {
-          config.libraries.forEach(lib => {
-            const entree = cachedTemplate.cloneNode(true);
-            entree.querySelector(".name").innerText = lib.name;
-            entree.querySelector(".url").innerText = lib.url;
-            entree.querySelector(".version").innerText = lib.version;
-            entree.querySelector(".global").checked = lib.global;
-            librariesContainer.appendChild(entree);
-          });
-          librariesLoaded = true;
-        }
       }
     }
     function closePoppup() {
@@ -697,20 +979,26 @@ document.addEventListener('mermaid-ready', (evt) => {
     })
 
     function showHideConsole(btn) {
+      if (!rendererWindow || !rendererWindow.document) {
+        console.warn('Renderer not yet initialized')
+        return
+      }
       const divConsole = rendererWindow.document.querySelector('.console')
+      if (!divConsole) {
+        console.warn('Console not yet initialized - try clicking RUN first')
+        return
+      }
       divConsole.classList.toggle('hide-console')
       const state = divConsole.classList.contains('hide-console')
       if (state) {
         divConsole.style.display = "none"
         consoleIsEnabled = false
         btn.querySelector('.console-label').innerText = 'Console'
-        console.log('Hide Console')
       } else {
-        divConsole.style.display = "block"
+        divConsole.style.display = "flex"
         divConsole.scrollTop = divConsole.scrollHeight;
         consoleIsEnabled = true
         btn.querySelector('.console-label').innerText = 'Console'
-        console.log('Show Console')
       }
     }
 

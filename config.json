@@ -1,12 +1,6 @@
 {
   "libraries": [
     {
-      "name": "console",
-      "url": "/js/console.js",
-      "version": "1",
-      "global": true
-    },
-    {
       "name": "react",
       "url": "https://unpkg.com/react@18/umd/react.development.js",
       "version": "18",
@@ -26,6 +20,18 @@
       "version": "7",
       "global": true,
       "crossorigin": true
+    },
+    {
+      "name": "jquery",
+      "url": "https://code.jquery.com/jquery-3.3.1.min.js",
+      "version": "3.3.1",
+      "global": true
+    },
+    {
+      "name": "jquery-ui",
+      "url": "https://code.jquery.com/ui/1.12.0/jquery-ui.min.js",
+      "version": "1.12.0",
+      "global": true
     }
   ],
   "partials": {

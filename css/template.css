@@ -200,6 +200,91 @@
   padding: 4px 10px;
   border-bottom: 0.1px dotted var(--border-dark);
   border-right: 0.1px dotted var(--border-dark);
+  vertical-align: middle;
+}
+
+/* Add library form */
+.add-library-form {
+  padding: 12px 0;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.add-library-form .form-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.add-library-form .form-control {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 0.9em;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.add-library-form .lib-name {
+  flex: 0.8;
+}
+
+.add-library-form .lib-url {
+  flex: 2;
+}
+
+.add-library-form .lib-version {
+  flex: 0.5;
+}
+
+.add-library-form .form-control::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.add-library-form .form-control:focus {
+  outline: none;
+  border-color: var(--accent-color, #007bff);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
+}
+
+.add-library-form .add-new-lib {
+  flex-shrink: 0;
+  padding: 6px 12px;
+}
+
+/* Remove library button */
+.library .remove-lib {
+  padding: 2px 8px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.library .remove-lib:hover {
+  opacity: 1;
+}
+
+/* Custom library indicator */
+.library.custom-lib .name::before {
+  content: '★ ';
+  color: var(--accent-color, #007bff);
+}
+
+/* Libraries navbar */
+.libs-navbar {
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+.libs-navbar button {
+  margin-left: 4px;
+}
+
+/* Libraries container scroll */
+.inner .libraries {
+  max-height: calc(100% - 140px);
+  overflow-y: auto;
 }
 
 #progress {

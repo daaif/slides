@@ -45,17 +45,29 @@
 
 <div class="outer" style="display:none">
   <div class="inner">
-    <ul class="navbar">
-      <li><button class=" btn btn-info close p-2">X</button></li>
-      <li><button class="addlibs btn btn-outline-info">Add</button></li>
+    <ul class="navbar libs-navbar">
+      <li><button class="btn btn-info close p-2"><i class="fas fa-times"></i></button></li>
+      <li><button class="addlibs btn btn-success"><i class="fas fa-check"></i> Apply</button></li>
     </ul>
+
+    <!-- Add new library form -->
+    <div class="add-library-form">
+      <div class="form-row">
+        <input type="text" class="form-control lib-name" placeholder="Name (e.g., jQuery)">
+        <input type="text" class="form-control lib-url" placeholder="CDN URL (e.g., https://cdn.../jquery.min.js)">
+        <input type="text" class="form-control lib-version" placeholder="Version">
+        <button class="btn btn-outline-primary add-new-lib" title="Add library"><i class="fas fa-plus"></i></button>
+      </div>
+    </div>
+
     <div class="libraries">
       <div class="library" style="display:none">
-        <div><input type="checkbox" class="sel" /> Selected</div>
+        <div><input type="checkbox" class="sel" /></div>
         <div class="name"></div>
         <div class="url"></div>
         <div class="version"></div>
-        <div><input type="checkbox" class="global" /> Global</div>
+        <div><input type="checkbox" class="global" title="Global (all slides)" /></div>
+        <div><button class="btn btn-sm btn-outline-danger remove-lib" title="Remove"><i class="fas fa-trash"></i></button></div>
       </div>
     </div>
   </div>
