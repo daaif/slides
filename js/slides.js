@@ -294,9 +294,17 @@ document.addEventListener('mermaid-ready', (evt) => {
           case 79: // 'O' key - toggle overview mode
             if (!isTextarea) toggleOverviewMode();
             break;
-          case 27: // Escape - exit overview mode
+          case 27: // Escape - exit overview mode or close modals
             if (document.body.classList.contains('overview-mode')) {
               exitOverviewMode();
+            } else if (isShortcutsModalOpen()) {
+              closeShortcutsModal();
+            }
+            break;
+          case 191: // '?' key - show shortcuts (shift + /)
+            if (evt.shiftKey && !isTextarea) {
+              evt.preventDefault();
+              toggleShortcutsModal();
             }
         }
         function go(hash, direction) {
@@ -340,18 +348,50 @@ document.addEventListener('mermaid-ready', (evt) => {
           }
         }
       });
+      // Improved touch/swipe handling
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchStartTime = 0;
+
       window.addEventListener("touchstart", function (evt) {
-        evt.stopImmediatePropagation();
-        pageX0 = evt.touches[0].pageX;
-      });
+        // Don't handle if in overview mode or on interactive elements
+        if (document.body.classList.contains('overview-mode')) return;
+        if (evt.target.closest('.CodeMirror, .console, .navbar-code, .navbar-renderer, #help')) return;
+
+        touchStartX = evt.touches[0].pageX;
+        touchStartY = evt.touches[0].pageY;
+        touchStartTime = Date.now();
+      }, { passive: true });
 
       window.addEventListener("touchend", function (evt) {
-        if (pageX0 === -1) return;
-        const delta = evt.changedTouches[0].pageX - pageX0;
-        if (delta > 60) location.hash = current - 1;
-        else if (delta < -60) location.hash = current + 1;
-        pageX0 = -1;
-      });
+        if (touchStartX === 0) return;
+
+        const touchEndX = evt.changedTouches[0].pageX;
+        const touchEndY = evt.changedTouches[0].pageY;
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+        const elapsed = Date.now() - touchStartTime;
+
+        // Calculate velocity for responsive swipe
+        const velocity = Math.abs(deltaX) / elapsed;
+
+        // Only trigger if horizontal swipe is dominant
+        if (Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+          // Adaptive threshold based on velocity
+          const threshold = velocity > 0.5 ? 30 : 60;
+
+          if (deltaX > threshold) {
+            location.hash = current - 1; // Swipe right = previous
+          } else if (deltaX < -threshold) {
+            location.hash = current + 1; // Swipe left = next
+          }
+        }
+
+        // Reset
+        touchStartX = 0;
+        touchStartY = 0;
+        touchStartTime = 0;
+      }, { passive: true });
     }
     function getCurrentSlideObject() {
       const currentSlide = document.querySelector(".slide.current");
@@ -747,6 +787,72 @@ document.addEventListener('mermaid-ready', (evt) => {
         gradsContainer.append(grad);
       });
     }
+
+    // =========================================
+    // Keyboard Shortcuts Modal
+    // =========================================
+
+    function isShortcutsModalOpen() {
+      const modal = document.querySelector('#shortcuts-modal');
+      return modal && modal.style.display !== 'none';
+    }
+
+    function toggleShortcutsModal() {
+      if (isShortcutsModalOpen()) {
+        closeShortcutsModal();
+      } else {
+        openShortcutsModal();
+      }
+    }
+
+    function openShortcutsModal() {
+      const modal = document.querySelector('#shortcuts-modal');
+      if (modal) {
+        modal.style.display = 'flex';
+        // Focus the close button for accessibility
+        const closeBtn = modal.querySelector('.shortcuts-close');
+        if (closeBtn) closeBtn.focus();
+      }
+    }
+
+    function closeShortcutsModal() {
+      const modal = document.querySelector('#shortcuts-modal');
+      if (modal) {
+        modal.style.display = 'none';
+      }
+    }
+
+    // Attach shortcuts modal events
+    function attachShortcutsModalEvents() {
+      const modal = document.querySelector('#shortcuts-modal');
+      const shortcutsBtn = document.querySelector('#shortcuts-btn');
+      const closeBtn = modal?.querySelector('.shortcuts-close');
+
+      // Open modal on button click
+      if (shortcutsBtn) {
+        shortcutsBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          openShortcutsModal();
+        });
+      }
+
+      // Close on X button click
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeShortcutsModal);
+      }
+
+      // Close on backdrop click
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            closeShortcutsModal();
+          }
+        });
+      }
+    }
+
+    // Initialize shortcuts modal events after templates are loaded
+    setTimeout(attachShortcutsModalEvents, 100);
 
   })();
 })

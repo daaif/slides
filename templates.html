@@ -95,6 +95,69 @@
   <a id="theme-toggle" class="btn btn-outline-secondary btn-sm" onclick="ThemeManager.toggle()" title="Changer de thème">
     <i class="fas fa-moon"></i>
   </a>
+  <a id="shortcuts-btn" class="btn btn-outline-warning btn-sm" title="Raccourcis clavier (?)">
+    <i class="fas fa-keyboard"></i>
+  </a>
+</div>
+
+<!-- Shortcuts Modal -->
+<div id="shortcuts-modal" class="shortcuts-modal" style="display: none;" role="dialog" aria-labelledby="shortcuts-title" aria-modal="true">
+  <div class="shortcuts-content">
+    <div class="shortcuts-header">
+      <h3 id="shortcuts-title"><i class="fas fa-keyboard"></i> Raccourcis clavier</h3>
+      <button class="shortcuts-close" aria-label="Fermer">&times;</button>
+    </div>
+    <div class="shortcuts-body">
+      <div class="shortcuts-section">
+        <h4>Navigation</h4>
+        <div class="shortcut-item">
+          <span class="shortcut-keys"><kbd>↑</kbd> <kbd>↓</kbd></span>
+          <span class="shortcut-desc">Slide précédent / suivant</span>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-keys"><kbd>PgUp</kbd> <kbd>PgDn</kbd></span>
+          <span class="shortcut-desc">Slide précédent / suivant</span>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>←</kbd> <kbd>→</kbd></span>
+          <span class="shortcut-desc">Navigation rapide</span>
+        </div>
+      </div>
+      <div class="shortcuts-section">
+        <h4>Éditeur de code</h4>
+        <div class="shortcut-item">
+          <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>Enter</kbd></span>
+          <span class="shortcut-desc">Exécuter le code</span>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-keys"><kbd>/</kbd> ou <kbd>F7</kbd></span>
+          <span class="shortcut-desc">Changer d'onglet (INTRO/HTML/CSS/JS)</span>
+        </div>
+      </div>
+      <div class="shortcuts-section">
+        <h4>Affichage</h4>
+        <div class="shortcut-item">
+          <span class="shortcut-keys"><kbd>O</kbd></span>
+          <span class="shortcut-desc">Mode vue d'ensemble</span>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-keys"><kbd>T</kbd></span>
+          <span class="shortcut-desc">Changer de thème (clair/sombre)</span>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-keys"><kbd>?</kbd></span>
+          <span class="shortcut-desc">Afficher cette aide</span>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-keys"><kbd>Esc</kbd></span>
+          <span class="shortcut-desc">Fermer les modales / Quitter overview</span>
+        </div>
+      </div>
+    </div>
+    <div class="shortcuts-footer">
+      <span class="shortcuts-hint">Astuce : Swipe gauche/droite sur mobile pour naviguer</span>
+    </div>
+  </div>
 </div>
 <iframe
   style="display: none;"

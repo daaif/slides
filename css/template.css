@@ -435,3 +435,365 @@ body.overview-mode #numSlides {
   padding: 4px;
   background: var(--bg-primary);
 }
+
+/* ===========================================
+   Keyboard Shortcuts Modal
+   =========================================== */
+
+.shortcuts-modal {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.shortcuts-content {
+  background: var(--modal-bg);
+  color: var(--text-primary);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px var(--shadow-strong);
+  max-width: 500px;
+  width: 90%;
+  max-height: 85vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.shortcuts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+}
+
+.shortcuts-header h3 {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.shortcuts-header h3 i {
+  color: var(--progress-fill);
+}
+
+.shortcuts-close {
+  background: none;
+  border: none;
+  font-size: 1.8em;
+  cursor: pointer;
+  color: var(--text-secondary);
+  line-height: 1;
+  padding: 0 5px;
+  transition: color 0.2s;
+}
+
+.shortcuts-close:hover {
+  color: var(--text-primary);
+}
+
+.shortcuts-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.shortcuts-section {
+  margin-bottom: 20px;
+}
+
+.shortcuts-section:last-child {
+  margin-bottom: 0;
+}
+
+.shortcuts-section h4 {
+  margin: 0 0 12px 0;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 6px;
+}
+
+.shortcut-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 0.9em;
+}
+
+.shortcut-keys {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.shortcut-keys kbd {
+  background: var(--kbd-bg);
+  color: var(--kbd-text);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-family: inherit;
+  box-shadow: 0 2px 0 var(--shadow-color);
+}
+
+.shortcut-desc {
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+.shortcuts-footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+}
+
+.shortcuts-hint {
+  font-size: 0.8em;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.shortcuts-hint::before {
+  content: '💡';
+}
+
+/* ===========================================
+   Mobile Responsive Styles
+   =========================================== */
+
+@media (max-width: 768px) {
+  /* Stack code and renderer vertically */
+  .slide.example {
+    flex-direction: column;
+  }
+
+  .slide.example .code,
+  .slide.example .renderer {
+    width: 100% !important;
+    height: 50% !important;
+  }
+
+  .slide.example .resizer {
+    width: 100%;
+    height: 10px;
+    cursor: ns-resize;
+    background: var(--resizer-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide.example .resizer::after {
+    content: '';
+    width: 40px;
+    height: 4px;
+    background: var(--border-color);
+    border-radius: 2px;
+  }
+
+  /* Wrap navbar items */
+  .slide.example .navbar-code,
+  .slide.example .navbar-renderer {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 40px;
+    padding: 4px;
+  }
+
+  .slide.example .navbar-code li,
+  .slide.example .navbar-renderer li {
+    min-width: auto;
+    margin: 2px;
+  }
+
+  .slide.example .navbar-code li a,
+  .slide.example .navbar-renderer li a {
+    padding: 4px 8px;
+    font-size: 0.75em;
+  }
+
+  /* Help buttons */
+  #help {
+    bottom: 0.5rem;
+    left: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  #help .btn {
+    padding: 4px 8px;
+  }
+
+  /* Progress bar */
+  #numSlides {
+    font-size: 0.45em;
+    padding: 2px 6px;
+  }
+
+  /* Overview mode */
+  body.overview-mode .slides {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    padding: 15px;
+  }
+
+  body.overview-mode .slide {
+    height: 150px !important;
+  }
+
+  /* Shortcuts modal */
+  .shortcuts-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .shortcuts-body {
+    padding: 15px;
+  }
+
+  .shortcut-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .shortcut-desc {
+    text-align: left;
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Hide text labels, show only icons */
+  .slide.example .navbar-code li a span,
+  .slide.example .navbar-renderer li a span {
+    display: none;
+  }
+
+  .slide.example .navbar-code li a i,
+  .slide.example .navbar-renderer li a i {
+    font-size: 1.1em;
+    margin: 0;
+  }
+
+  .slide.example .navbar-code li,
+  .slide.example .navbar-renderer li {
+    min-width: 36px;
+  }
+
+  /* Smaller help buttons */
+  #help .btn {
+    padding: 3px 6px;
+    font-size: 0.8em;
+  }
+
+  /* Smaller overview tiles */
+  body.overview-mode .slides {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+    padding: 10px;
+  }
+
+  body.overview-mode .slide {
+    height: 120px !important;
+  }
+
+  body.overview-mode .slide::after {
+    font-size: 0.6em;
+    padding: 1px 5px;
+  }
+}
+
+/* Touch-friendly button sizes */
+@media (pointer: coarse) {
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .slide.example .navbar-code li a,
+  .slide.example .navbar-renderer li a {
+    padding: 10px 12px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #help .btn {
+    min-height: 40px;
+    min-width: 40px;
+  }
+
+  .shortcuts-close {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* ===========================================
+   Skip Link for Accessibility
+   =========================================== */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--progress-fill);
+  color: white;
+  padding: 10px 20px;
+  z-index: 100000;
+  text-decoration: none;
+  font-weight: bold;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ===========================================
+   Focus Visible Styles
+   =========================================== */
+
+:focus-visible {
+  outline: 2px solid var(--progress-fill);
+  outline-offset: 2px;
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 3px var(--progress-fill);
+}
