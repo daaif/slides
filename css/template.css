@@ -306,3 +306,132 @@
   bottom: 40px;
   background-color: rgba(156, 48, 48, 0.5);
 }
+
+/* ===========================================
+   Overview Mode - Grid view of all slides
+   =========================================== */
+
+body.overview-mode {
+  overflow: auto;
+}
+
+body.overview-mode .slides {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 30px;
+  height: auto;
+  min-height: 100vh;
+}
+
+body.overview-mode .slide {
+  position: relative !important;
+  height: 200px !important;
+  margin: 0 !important;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  background: var(--bg-primary);
+}
+
+body.overview-mode .slide:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px var(--shadow-strong);
+  border-color: var(--progress-fill);
+}
+
+body.overview-mode .slide.hide {
+  display: block !important;
+}
+
+body.overview-mode .slide.current {
+  border-color: var(--progress-fill);
+  box-shadow: 0 0 0 3px var(--progress-fill);
+}
+
+body.overview-mode .slide.example {
+  flex-direction: column;
+}
+
+body.overview-mode .slide.example .code,
+body.overview-mode .slide.example .renderer,
+body.overview-mode .slide.example .resizer {
+  display: none;
+}
+
+body.overview-mode .slide.page {
+  padding: 10px;
+  font-size: 0.5em;
+}
+
+body.overview-mode .slide::after {
+  content: attr(data-slide-num);
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: var(--bg-overlay);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.7em;
+  font-weight: bold;
+}
+
+body.overview-mode #progress,
+body.overview-mode #grad,
+body.overview-mode #help,
+body.overview-mode #numSlides {
+  display: none !important;
+}
+
+/* ===========================================
+   Slide Preview on hover (progress bar)
+   =========================================== */
+
+#grad .grad {
+  position: relative;
+}
+
+#grad .grad .slide-preview {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 140px;
+  background: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px var(--shadow-strong);
+  overflow: hidden;
+  z-index: 9500;
+  pointer-events: none;
+}
+
+#grad .grad .slide-preview::after {
+  content: attr(data-preview-num);
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  background: var(--bg-overlay);
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 0.8em;
+}
+
+#top:hover #grad .grad:hover .slide-preview {
+  display: block;
+}
+
+#grad .grad .slide-preview-content {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: 0.4em;
+  padding: 4px;
+  background: var(--bg-primary);
+}

@@ -1,13 +1,13 @@
 <div id="template" style="display: none">
   <div>
     <div class="code">
-      <ul class="navbar-code">
-        <li><a href="#intro" class="btn btn-outline-dark">INTRO</a></li>
-        <li class="active">
-          <a href="#html" class="btn btn-outline-success">HTML</a>
+      <ul class="navbar-code" role="tablist" aria-label="Éditeurs de code">
+        <li role="presentation"><a href="#intro" role="tab" class="btn btn-outline-dark"><i class="fas fa-info-circle"></i> <span>INTRO</span></a></li>
+        <li role="presentation" class="active">
+          <a href="#html" role="tab" class="btn btn-outline-success"><i class="fab fa-html5"></i> <span>HTML</span></a>
         </li>
-        <li><a href="#css" class="btn btn-outline-info">CSS</a></li>
-        <li><a href="#js" class="btn btn-outline-warning">JS</a></li>
+        <li role="presentation"><a href="#css" role="tab" class="btn btn-outline-info"><i class="fab fa-css3-alt"></i> <span>CSS</span></a></li>
+        <li role="presentation"><a href="#js" role="tab" class="btn btn-outline-warning"><i class="fab fa-js-square"></i> <span>JS</span></a></li>
       </ul>
       <div class="container-code">
         <div class="intro"></div>
@@ -25,15 +25,15 @@
     <div class="resizer"></div>
     <div class="renderer">
       <ul class="navbar-renderer">
-        <li><a href="#run" class="run btn btn-outline-danger">RUN</a></li>
-        <li class="">
-          <a href="#reset" class="reset btn btn-outline-danger">RESET</a>
+        <li><a href="#run" class="run btn btn-outline-danger"><i class="fas fa-play"></i> <span>RUN</span></a></li>
+        <li>
+          <a href="#reset" class="reset btn btn-outline-danger"><i class="fas fa-undo"></i> <span>RESET</span></a>
         </li>
-        <li class="">
-          <a href="#libs" class="libs btn btn-outline-danger">Libraries</a>
+        <li>
+          <a href="#libs" class="libs btn btn-outline-danger"><i class="fas fa-cube"></i> <span>Libs</span></a>
         </li>
-        <li class="">
-          <a href="#console" class="btn-console btn btn-outline-primary">Show Console</a>
+        <li>
+          <a href="#console" class="btn-console btn btn-outline-primary"><i class="fas fa-terminal"></i> <span class="console-label">Console</span></a>
         </li>
       </ul>
       <div class="container-renderer">

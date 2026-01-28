@@ -290,6 +290,14 @@ document.addEventListener('mermaid-ready', (evt) => {
             break;
           case 84: // 'T' key - toggle theme
             if (!isTextarea) ThemeManager.toggle();
+            break;
+          case 79: // 'O' key - toggle overview mode
+            if (!isTextarea) toggleOverviewMode();
+            break;
+          case 27: // Escape - exit overview mode
+            if (document.body.classList.contains('overview-mode')) {
+              exitOverviewMode();
+            }
         }
         function go(hash, direction) {
           const slide = slideObject.slide
@@ -629,21 +637,9 @@ document.addEventListener('mermaid-ready', (evt) => {
       });
     }
 
-    window.addEventListener("resize", () => setTimeout(resizeGraduations, 30));
-    function resizeGraduations(evt) {
-      const grads = document.querySelector("#grad");
-      grads.innerHTML = "";
-      const width = 100 / slides.length + "%";
-      slides.forEach((s, i) => {
-        const grad = document.createElement("div");
-        grad.style.width = width;
-        grad.classList.add("grad");
-        grad.innerText = i + 1;
-        grads.append(grad);
-      });
-    }
+    window.addEventListener("resize", () => setTimeout(resizeGraduationsWithPreviews, 30));
 
-    setTimeout(resizeGraduations, 30);
+    setTimeout(resizeGraduationsWithPreviews, 30);
     // Allez au premier slide.
     navigate()
 
@@ -667,17 +663,91 @@ document.addEventListener('mermaid-ready', (evt) => {
       if (state) {
         divConsole.style.display = "none"
         consoleIsEnabled = false
-        btn.innerText = 'Show Console'
+        btn.querySelector('.console-label').innerText = 'Console'
         console.log('Hide Console')
       } else {
         divConsole.style.display = "block"
         divConsole.scrollTop = divConsole.scrollHeight;
         consoleIsEnabled = true
-        btn.innerText = 'Hide Console'
+        btn.querySelector('.console-label').innerText = 'Console'
         console.log('Show Console')
       }
-
     }
+
+    // =========================================
+    // Overview Mode Functions
+    // =========================================
+
+    function toggleOverviewMode() {
+      if (document.body.classList.contains('overview-mode')) {
+        exitOverviewMode();
+      } else {
+        enterOverviewMode();
+      }
+    }
+
+    function enterOverviewMode() {
+      document.body.classList.add('overview-mode');
+
+      // Add slide numbers and click handlers
+      slides.forEach((s, i) => {
+        s.slide.setAttribute('data-slide-num', i + 1);
+        s.slide.classList.remove('hide');
+        s.slide.addEventListener('click', overviewSlideClickHandler);
+      });
+    }
+
+    function exitOverviewMode() {
+      document.body.classList.remove('overview-mode');
+
+      // Remove click handlers and restore normal view
+      slides.forEach((s, i) => {
+        s.slide.removeEventListener('click', overviewSlideClickHandler);
+      });
+
+      // Navigate to current slide
+      navigate(current);
+    }
+
+    function overviewSlideClickHandler(evt) {
+      const clickedSlide = evt.currentTarget;
+      const index = slides.findIndex(s => s.slide === clickedSlide);
+      if (index !== -1) {
+        exitOverviewMode();
+        location.hash = index;
+      }
+    }
+
+    // =========================================
+    // Slide Previews on Progress Bar
+    // =========================================
+
+    function resizeGraduationsWithPreviews() {
+      const gradsContainer = document.querySelector("#grad");
+      gradsContainer.innerHTML = "";
+      const width = 100 / slides.length + "%";
+
+      slides.forEach((s, i) => {
+        const grad = document.createElement("div");
+        grad.style.width = width;
+        grad.classList.add("grad");
+        grad.innerText = i + 1;
+
+        // Add preview container
+        const preview = document.createElement("div");
+        preview.classList.add("slide-preview");
+        preview.setAttribute("data-preview-num", `Slide ${i + 1}`);
+
+        const previewContent = document.createElement("div");
+        previewContent.classList.add("slide-preview-content");
+        previewContent.innerText = s.type === 'page' ? `Page: ${s.page}` : `Example: ${s.html || s.intro}`;
+
+        preview.appendChild(previewContent);
+        grad.appendChild(preview);
+        gradsContainer.append(grad);
+      });
+    }
+
   })();
 })
 
