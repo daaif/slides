@@ -28,7 +28,7 @@
   /* UI Components */
   --navbar-bg: #eeeeee;
   --navbar-border: #cccccc;
-  --resizer-bg: #eeeeee;
+  --resizer-bg: #ccc;
   --modal-bg: #ffffff;
 
   /* Console */
@@ -118,6 +118,86 @@
 
 [data-theme="dark"] .progress {
   background-color: var(--bg-tertiary);
+}
+
+/* Text colors */
+[data-theme="dark"] .text-dark {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+/* Cards */
+[data-theme="dark"] .card {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .card-body {
+  background-color: var(--bg-secondary);
+}
+
+/* Alerts */
+[data-theme="dark"] .alert-info {
+  background-color: #1a3a4a;
+  border-color: #2a4a5a;
+  color: #8ecae6;
+}
+
+[data-theme="dark"] .alert-warning {
+  background-color: #4a3a1a;
+  border-color: #5a4a2a;
+  color: #f0c674;
+}
+
+[data-theme="dark"] .alert-success {
+  background-color: #1a3a2a;
+  border-color: #2a4a3a;
+  color: #8fbc8f;
+}
+
+[data-theme="dark"] .alert-danger {
+  background-color: #4a1a1a;
+  border-color: #5a2a2a;
+  color: #e08080;
+}
+
+/* Tables */
+[data-theme="dark"] .table {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .table td,
+[data-theme="dark"] .table th {
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .table thead th {
+  border-color: var(--border-color);
+  background-color: var(--bg-tertiary);
+}
+
+[data-theme="dark"] .table-striped tbody tr:nth-of-type(odd) {
+  background-color: var(--bg-tertiary);
+}
+
+[data-theme="dark"] .table-bordered {
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .table-hover tbody tr:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Mermaid diagrams */
+[data-theme="dark"] .mermaid {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
 }
 
 /* ---- Utility: Smooth Theme Transition ---- */
