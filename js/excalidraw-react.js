@@ -7,7 +7,7 @@ const { Excalidraw } = ExcalidrawLib;
         ref: (api) => setExcalidrawAPI(api),
         initialData: {
           appState: {
-            viewBackgroundColor: "#ffffff",
+            viewBackgroundColor: "rgba(255,255,255,0.3)",
             currentItemFontFamily: 1,
             language: "fr"
           }
